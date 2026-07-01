@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-site",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.js", "5173"],
+      "port": 5173
+    },
+    {
+      "name": "email-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/static-server.js", "5569", "../Landing Page"],
+      "port": 5569
+    }
+  ]
+}
