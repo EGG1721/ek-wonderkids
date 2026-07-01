@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # EK WonderKids Website
 
 Official website for EK WonderKids.
@@ -21,3 +22,7 @@ Official website for EK WonderKids.
 ## Live Website
 
 https://ekwonderkids.com
+=======
+# ek-wonderkids
+Official website for EK WonderKids - Inspiring creativity and learning through children's books.
+>>>>>>> b872ce1ffb4fdcbba6fed0d71fb5f11f0b82a87d
