@@ -9,20 +9,19 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
-    const brevoResponse = await fetch("https://api.brevo.com/v3/contacts", {
+    const mailerliteResponse = await fetch("https://connect.mailerlite.com/api/subscribers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "api-key": env.BREVO_API_KEY
+        "Authorization": `Bearer ${env.MAILERLITE_API_KEY}`
       },
       body: JSON.stringify({
         email,
-        listIds: [Number(env.BREVO_LIST_ID)],
-        updateEnabled: true
+        groups: [env.MAILERLITE_GROUP_ID]
       })
     });
 
-    if (!brevoResponse.ok) {
+    if (!mailerliteResponse.ok) {
       return Response.json(
         { message: "We could not save your email right now." },
         { status: 500 }
