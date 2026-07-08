@@ -50,14 +50,14 @@ function initActiveNavLink() {
 
 // ============ Newsletter form ============
 function initNewsletterForm() {
-  const form = document.getElementById('newsletterForm');
-  const emailInput = document.getElementById('newsletterEmail');
+  const form = document.getElementById('subscribeForm');
+  const emailInput = document.getElementById('email');
   const note = document.getElementById('newsletterNote');
   if (!form || !emailInput || !note) return;
 
   const defaultNote = note.textContent;
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const email = emailInput.value.trim();
 
@@ -68,51 +68,42 @@ function initNewsletterForm() {
       return;
     }
 
-    // No backend is wired up yet — replace this with a real API/email service call.
-    note.textContent = "You're on the list! We'll email you when new books launch.";
-    note.style.color = '#fff';
-    note.style.fontWeight = '700';
-    form.reset();
+    note.textContent = 'Sending...';
+    note.style.color = '';
+    note.style.fontWeight = '';
 
-    setTimeout(() => {
-      note.textContent = defaultNote;
-      note.style.color = '';
-      note.style.fontWeight = '';
-    }, 5000);
+    try {
+      const response = await fetch('/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong.');
+      }
+
+      note.textContent = "Thank you! You're now subscribed.";
+      note.style.color = '#fff';
+      note.style.fontWeight = '700';
+      form.reset();
+
+      setTimeout(() => {
+        note.textContent = defaultNote;
+        note.style.color = '';
+        note.style.fontWeight = '';
+      }, 5000);
+
+    } catch (error) {
+      note.textContent = error.message;
+      note.style.color = '#fff';
+      note.style.fontWeight = '700';
+    }
   });
 }
 
 function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
-
-const form = document.getElementById('subscribeForm');
-const message = document.getElementById('form-message');
-
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  const email = document.getElementById('email').value.trim();
-
-  message.textContent = "Sending...";
-
-  try {
-    const response = await fetch("/subscribe", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || "Something went wrong.");
-    }
-
-    message.textContent = "Thank you! You are now subscribed.";
-    form.reset();
-  } catch (error) {
-    message.textContent = error.message;
-  }
-});
