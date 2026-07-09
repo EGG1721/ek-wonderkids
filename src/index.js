@@ -36,8 +36,9 @@ async function handleSubscribe(request, env) {
     });
 
     if (!mailerliteResponse.ok) {
+      const errorDetail = await mailerliteResponse.text();
       return Response.json(
-        { message: "We could not save your email right now." },
+        { message: "DEBUG: " + mailerliteResponse.status + " - " + errorDetail },
         { status: 500 }
       );
     }
