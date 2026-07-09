@@ -23,6 +23,18 @@ async function handleSubscribe(request, env) {
       );
     }
 
+    // DEBUG TEMPORAL: verificar si las variables de entorno existen
+    const keyExists = typeof env.MAILERLITE_API_KEY === "string" && env.MAILERLITE_API_KEY.length > 0;
+    const keyPreview = keyExists ? env.MAILERLITE_API_KEY.slice(0, 6) + "..." : "MISSING";
+    const groupExists = typeof env.MAILERLITE_GROUP_ID === "string" && env.MAILERLITE_GROUP_ID.length > 0;
+
+    if (!keyExists || !groupExists) {
+      return Response.json(
+        { message: `DEBUG ENV: keyExists=${keyExists} keyPreview=${keyPreview} groupExists=${groupExists} groupValue=${env.MAILERLITE_GROUP_ID}` },
+        { status: 500 }
+      );
+    }
+
     const mailerliteResponse = await fetch("https://connect.mailerlite.com/api/subscribers", {
       method: "POST",
       headers: {
