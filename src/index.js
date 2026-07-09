@@ -27,6 +27,7 @@ async function handleSubscribe(request, env) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Accept": "application/json",
         "Authorization": `Bearer ${env.MAILERLITE_API_KEY}`
       },
       body: JSON.stringify({
