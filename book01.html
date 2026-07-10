@@ -1,0 +1,229 @@
+
+Landing waiting jar · HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Parent Reflection Guide — The Waiting Jar | EK WonderKids</title>
+<meta name="description" content="Sign up to get your free Parent Reflection Guide, the companion resource for The Waiting Jar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /*
+    ═══════════════════════════════════════════
+    PALETA DE COLORES — The Waiting Jar
+    ═══════════════════════════════════════════
+    Tomada de la portada: dormitorio cálido, luz dorada
+    del frasco, sudadera azul-verdoso, madera café tibio.
+    Usa estos mismos códigos al diseñar el formulario
+    embebido dentro de MailerLite para que combine.
+ 
+    --amber (luz del frasco / acentos dorados):   #E8A93D
+    --amber-deep (dorado botones):                #C98A24
+    --wood (madera / marco cálido):                #6B4A32
+    --wood-deep (fondo oscuro cálido):             #3D2A1C
+    --teal (sudadera, acento fresco):              #5B7C99
+    --cream (fondo general / pared):               #F5EAD9
+    --ink (texto principal):                       #2E2318
+  */
+  :root{
+    --amber:#E8A93D;
+    --amber-deep:#C98A24;
+    --wood:#6B4A32;
+    --wood-deep:#3D2A1C;
+    --teal:#5B7C99;
+    --cream:#F5EAD9;
+    --ink:#2E2318;
+  }
+ 
+  *{box-sizing:border-box; margin:0; padding:0;}
+ 
+  body{
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Nunito', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+ 
+  .page{ max-width: 640px; margin: 0 auto; background:#fff; }
+ 
+  .trail{
+    height: 28px;
+    background-image: radial-gradient(circle, var(--amber) 3px, transparent 3px);
+    background-size: 22px 22px;
+    background-position: center;
+    background-repeat: repeat-x;
+    opacity:0.85;
+  }
+ 
+  /* --- HERO --- */
+  .hero{
+    position:relative;
+    background: linear-gradient(180deg, var(--wood-deep) 0%, var(--wood) 55%, #5C3E29 100%);
+    padding: 40px 28px 32px;
+    text-align:center;
+    color:#fff;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Baloo 2', sans-serif; font-weight:700; font-size:13px;
+    letter-spacing:.08em; text-transform:uppercase; color: var(--amber);
+    margin-bottom:14px;
+  }
+  .eyebrow::before, .eyebrow::after{ content:""; width:20px; height:1px; background: var(--amber); opacity:.6; }
+  .hero h1{
+    font-family:'Baloo 2', sans-serif; font-weight:800;
+    font-size: clamp(28px, 6vw, 40px); line-height:1.15; color:#fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  }
+  .hero h1 span{ color: var(--amber); }
+  .hero p.sub{
+    margin-top:12px; font-size:16px; color:#EDE0D3;
+    max-width: 460px; margin-left:auto; margin-right:auto;
+  }
+  .cover-wrap{
+    margin: 28px auto 4px; max-width: 300px; border-radius: 14px; overflow:hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.45), 0 0 0 6px rgba(232,169,61,0.18);
+    transform: rotate(-1.2deg);
+  }
+  .cover-wrap img{ width:100%; display:block; }
+ 
+  /* --- WHAT YOU GET --- */
+  .offer-section{ padding: 40px 30px 10px; text-align:center; }
+  .offer-section .icon{ width:44px; height:44px; margin: 0 auto 14px; display:flex; align-items:center; justify-content:center; }
+  .offer-section h2{ font-family:'Baloo 2', sans-serif; font-size:24px; color: var(--wood); margin-bottom:10px; }
+  .offer-section > p{ color:#6B5A47; font-size:15.5px; max-width: 460px; margin: 0 auto 30px; }
+ 
+  .feature-list{
+    display:grid; grid-template-columns: 1fr 1fr; gap:16px;
+    max-width: 460px; margin: 0 auto;
+  }
+  .feature{
+    background: #FBF3E4; border: 1px solid #EEDCC0; border-radius:14px;
+    padding: 18px 16px; text-align:left;
+  }
+  .feature .f-icon{ font-size:20px; margin-bottom:8px; }
+  .feature h4{ font-family:'Baloo 2', sans-serif; font-size:14.5px; color: var(--wood); margin-bottom:4px; }
+  .feature p{ font-size:13px; color:#8A7561; line-height:1.5; }
+ 
+  /* --- FORM SECTION --- */
+  .form-section{
+    margin: 40px 24px 0;
+    background: linear-gradient(135deg, #F6E9D4 0%, #EFDBB8 100%);
+    border: 1px solid rgba(201,138,36,0.35);
+    border-radius: 20px;
+    padding: 32px 28px 30px;
+    text-align:center;
+  }
+  .form-section h3{ font-family:'Baloo 2', sans-serif; font-size:21px; color: var(--wood); margin-bottom:6px; }
+  .form-section .form-note{ font-size:14px; color:#8A7561; margin-bottom:22px; }
+ 
+  /*
+    MAILERLITE EMBEDDED FORM GOES HERE.
+    En MailerLite: Forms > Create form > Embedded form.
+    Copia el bloque <div> + <script> que te da MailerLite y pégalo
+    dentro de #mailerlite-form-placeholder, reemplazando el comentario.
+ 
+    Sugerencia de estilo dentro del editor de diseño de MailerLite,
+    para que combine con esta página:
+      - Fondo del input:      #FBF3E4
+      - Borde del input:      #E4C8A0
+      - Texto:                 #2E2318
+      - Botón:                 #C98A24 (dorado/ámbar)
+      - Texto del botón:       #3D2A1C (café oscuro, buen contraste sobre ámbar)
+      - Encabezados:            #6B4A32
+  */
+ 
+  .form-fallback-note{
+    font-size:12.5px; color:#A6907A; margin-top:16px; font-style:italic;
+  }
+ 
+  /* --- FOOTER --- */
+  footer{
+    background: var(--wood-deep); color: rgba(255,255,255,0.55);
+    text-align:center; padding: 26px 20px; margin-top:44px; font-size:12.5px;
+  }
+  footer .brand{ font-family:'Baloo 2', sans-serif; color:#fff; font-weight:700; font-size:14px; margin-bottom:4px; }
+  footer .brand span{ color: var(--amber); }
+ 
+  @media (max-width: 460px){
+    .feature-list{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+ 
+<div class="page">
+ 
+  <!-- HERO -->
+  <section class="hero">
+    <span class="eyebrow">Seeds of Character Series</span>
+    <h1>Thank you for choosing <span>The Waiting Jar</span></h1>
+    <p class="sub">A story about patience, saving, and making the decisions that matter most.</p>
+ 
+    <div class="cover-wrap">
+      <img src="images/portada-waiting-jar.jpg" alt="Cover of the book The Waiting Jar">
+    </div>
+  </section>
+ 
+  <div class="trail"></div>
+ 
+  <!-- WHAT YOU GET -->
+  <section class="offer-section">
+    <div class="icon">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="22" stroke="#E8A93D" stroke-width="2.5"/>
+        <path d="M24 12 L27 21 L36 24 L27 27 L24 36 L21 27 L12 24 L21 21 Z" fill="#E8A93D"/>
+      </svg>
+    </div>
+    <h2>Get your free Parent Reflection Guide</h2>
+    <p>Sign up below and we'll send you a printable guide with conversation starters to help you and your child talk about patience, waiting, and making thoughtful choices together.</p>
+ 
+    <div class="feature-list">
+      <div class="feature">
+        <div class="f-icon">💬</div>
+        <h4>Conversation starters</h4>
+        <p>Simple questions to open up meaningful talks after story time.</p>
+      </div>
+      <div class="feature">
+        <div class="f-icon">🫙</div>
+        <h4>Patience activities</h4>
+        <p>Hands-on ideas to practice waiting and delayed gratification.</p>
+      </div>
+      <div class="feature">
+        <div class="f-icon">🌱</div>
+        <h4>Family reflection</h4>
+        <p>Prompts designed for parents to reflect alongside their kids.</p>
+      </div>
+      <div class="feature">
+        <div class="f-icon">🎁</div>
+        <h4>100% free</h4>
+        <p>Our gift to you for choosing this book.</p>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- FORM -->
+  <section class="form-section">
+    <h3>Sign up to get your guide</h3>
+    <p class="form-note">Enter your name and email — we'll deliver it straight to your inbox.</p>
+ 
+    <div id="mailerlite-form-placeholder">
+      <!-- ▼▼▼ PASTE YOUR MAILERLITE EMBEDDED FORM SNIPPET HERE ▼▼▼ -->
+      <!-- ▲▲▲ END MAILERLITE SNIPPET ▲▲▲ -->
+    </div>
+ 
+    <p class="form-fallback-note">By signing up you agree to receive emails from EK WonderKids. You can unsubscribe anytime.</p>
+  </section>
+ 
+  <footer>
+    <div class="brand">EK <span>WonderKids</span></div>
+    <div>Stories that plant character, one page at a time.</div>
+  </footer>
+ 
+</div>
+ 
+</body>
+</html>
