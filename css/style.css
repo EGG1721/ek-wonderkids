@@ -9,6 +9,7 @@
   --blue-brand: #1569cc;
   --gold: #f5c200;
   --gold-dark: #b47800;
+  --green: #4caf50;
   --red: #e5231a;
   --purple: #7c3aed;
   --purple-dark: #5b21b6;
@@ -87,6 +88,7 @@ a { color: inherit; }
 }
 .btn-buy--purple { background: var(--purple); box-shadow: 0 4px 0 var(--purple-dark); }
 .btn-buy--gold-dark { background: var(--gold-dark); box-shadow: 0 4px 0 #8a5a00; }
+.btn-buy--green { background: var(--green); box-shadow: 0 4px 0 #1a5e27; }
 .btn-buy--blue { background: var(--blue-brand); box-shadow: 0 4px 0 #0e4a9a; }
 .btn-buy--gold { background: var(--gold); color: var(--navy-ink); box-shadow: 0 4px 0 #c8920a; }
 .btn-buy--red { background: var(--red); box-shadow: 0 4px 0 #a81810; }
@@ -119,6 +121,7 @@ a { color: inherit; }
 .eyebrow-blue { color: var(--blue-brand); }
 .eyebrow-gold { color: var(--gold); }
 .eyebrow-gold-dark { color: #c8920a; }
+.eyebrow-green { color: #4caf50; }
 .eyebrow-light { color: rgba(255, 255, 255, .7); }
 
 .text-gold { color: var(--gold); text-shadow: 0 0 40px rgba(245, 194, 0, .55); }
@@ -270,6 +273,7 @@ a { color: inherit; }
 .book-card:hover { transform: translateY(-6px); }
 .book-card--purple { border: 2px solid #ddd0f8; box-shadow: 0 8px 32px rgba(124, 58, 237, .1); }
 .book-card--gold { border: 2px solid #fde8a0; box-shadow: 0 8px 32px rgba(200, 146, 10, .12); }
+.book-card--green { border: 2px solid #c8e6c9; box-shadow: 0 8px 32px rgba(76, 175, 80, .1); }
 
 .book-cover { position: relative; height: 300px; overflow: hidden; }
 .book-cover img { width: 100%; height: 100%; object-fit: cover; }
@@ -291,6 +295,8 @@ a { color: inherit; }
 }
 .book-badge--purple { background: rgba(124, 58, 237, .92); }
 .book-badge--gold-dark { background: rgba(180, 120, 0, .92); }
+.book-badge--green { background: rgba(76, 175, 80, .92); }
+
 .book-cover-caption { position: absolute; bottom: 20px; left: 22px; right: 22px; }
 .book-cover-caption h3 {
   font: 900 26px/1.15 'Nunito', sans-serif;
