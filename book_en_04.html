@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ready for Rain, Ready for Stars — Free Companion | EK WonderKids</title>
+<meta name="description" content="Get the free companion guide for Ready for Rain, Ready for Stars — conversation questions, jar labels, a weekly tracker, and a certificate for your Ready Kid.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#E8A83C;
+    --gold-deep:#C97B2E;
+    --forest:#3A5A45;
+    --forest-deep:#24382A;
+    --cream:#FBF3E3;
+    --ink:#2E2418;
+    --muted:#6B5B45;
+    --plum:#6B4C6B;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Nunito',sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit;}
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(1100px 600px at 15% -10%, rgba(255,255,255,0.18), transparent 60%),
+      linear-gradient(155deg, #F3C77E 0%, #E8A559 32%, #C97B2E 68%, #3A5A45 130%);
+    overflow:hidden;
+    padding-bottom:40px;
+  }
+  .hero-nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 0 0;
+  }
+  .brandmark{
+    font-family:'Baloo2'; font-weight:700; font-size:18px; color:var(--cream);
+    display:flex; align-items:center; gap:9px;
+  }
+  .brandmark .dot{width:9px;height:9px;border-radius:50%;background:var(--cream); opacity:0.85;}
+  .series-pill{
+    font-family:'Nunito'; font-weight:700; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--forest-deep); background:rgba(255,255,255,0.82); padding:7px 15px; border-radius:30px;
+  }
+
+  .hero-grid{
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:48px; align-items:center;
+    padding-top:56px;
+  }
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr; padding-top:34px;}
+    .jar-stage{order:-1; margin:0 auto 8px;}
+  }
+
+  .eyebrow{
+    font-family:'Nunito'; font-weight:700; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#3E2A12; opacity:0.75; margin-bottom:14px;
+  }
+  h1{
+    font-family:'Baloo2'; font-weight:800; font-size:clamp(32px,4.6vw,50px); line-height:1.06;
+    color:var(--forest-deep); margin:0 0 18px;
+    text-shadow: 0 2px 0 rgba(255,255,255,0.25);
+  }
+  .hero-sub{
+    font-family:'Nunito'; font-weight:600; font-size:17px; line-height:1.55; color:#3E2A12;
+    max-width:480px; margin-bottom:28px;
+  }
+
+  .capture{
+    background:rgba(255,255,255,0.92);
+    border-radius:16px;
+    padding:20px;
+    max-width:480px;
+    box-shadow:0 18px 40px rgba(36,56,42,0.22);
+  }
+  .capture-label{
+    font-family:'Baloo2'; font-weight:700; font-size:15px; color:var(--forest-deep); margin-bottom:10px;
+  }
+  .capture-form{ display:flex; gap:10px; flex-wrap:wrap; }
+  .capture-form input[type=email]{
+    flex:1 1 220px; min-width:0;
+    font-family:'Nunito'; font-weight:600; font-size:15px;
+    padding:13px 16px; border-radius:10px; border:2px solid #EADBBB; outline:none; color:var(--ink);
+    background:#FFFDF8;
+  }
+  .capture-form input[type=email]:focus{ border-color:var(--gold-deep); }
+  .capture-form button{
+    font-family:'Baloo2'; font-weight:700; font-size:15px; color:#FFF8EA;
+    background:var(--forest-deep); border:none; border-radius:10px; padding:13px 22px;
+    cursor:pointer; transition:transform .15s ease, background .15s ease;
+  }
+  .capture-form button:hover{ background:var(--forest); transform:translateY(-1px); }
+  .capture-form button:focus-visible, .capture-form input:focus-visible{ outline:3px solid var(--gold-deep); outline-offset:2px; }
+  .capture-note{ font-family:'Nunito'; font-size:12.5px; color:#7A6A50; margin-top:10px; }
+
+  /* jar illustration */
+  .jar-stage{ display:flex; justify-content:center; align-items:flex-end; }
+  .jar-svg{ width:min(320px, 78vw); }
+  .coin{ animation: drop 900ms cubic-bezier(.34,1.56,.64,1) both; }
+  @media (prefers-reduced-motion: reduce){ .coin{ animation:none !important; } }
+
+  /* ---------- WHAT'S INSIDE ---------- */
+  .section{ padding:64px 0; }
+  .section-head{ text-align:center; max-width:620px; margin:0 auto 40px; }
+  .section-eyebrow{
+    font-family:'Nunito'; font-weight:700; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--gold-deep); margin-bottom:10px;
+  }
+  h2{ font-family:'Baloo2'; font-weight:700; font-size:clamp(24px,3vw,32px); color:var(--forest-deep); margin:0 0 10px; }
+  .section-sub{ font-family:'Nunito'; font-size:15.5px; color:var(--muted); line-height:1.6; }
+
+  .cards{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:18px;
+  }
+  @media (max-width:860px){ .cards{grid-template-columns:1fr 1fr;} }
+  @media (max-width:520px){ .cards{grid-template-columns:1fr;} }
+  .card{
+    background:#fff; border:1px solid #EFE4C9; border-radius:14px; padding:24px 20px;
+    box-shadow:0 6px 18px rgba(58,90,69,0.06);
+  }
+  .card .icon{ font-size:30px; margin-bottom:12px; }
+  .card h3{ font-family:'Baloo2'; font-weight:700; font-size:16.5px; color:var(--forest-deep); margin:0 0 6px; }
+  .card p{ font-family:'Nunito'; font-size:13.5px; color:var(--muted); line-height:1.5; margin:0; }
+
+  /* ---------- ABOUT THE BOOK ---------- */
+  .about{
+    background:var(--forest-deep);
+    color:var(--cream);
+  }
+  .about-grid{
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:44px; align-items:center;
+  }
+  @media (max-width:820px){ .about-grid{grid-template-columns:1fr;} }
+  .book-mock{
+    aspect-ratio:1/1; border-radius:14px;
+    background: linear-gradient(160deg, #F3C77E 0%, #E8A559 30%, #C97B2E 62%, #3A5A45 100%);
+    display:flex; flex-direction:column; justify-content:space-between; padding:26px;
+    box-shadow:0 20px 44px rgba(0,0,0,0.35);
+  }
+  .book-mock .tag{
+    font-family:'Nunito'; font-weight:700; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase;
+    color:#fff; text-shadow:0 2px 5px rgba(0,0,0,0.4);
+  }
+  .book-mock .btitle{
+    font-family:'Baloo2'; font-weight:800; font-size:26px; color:#fff; line-height:1.06;
+    text-shadow:0 3px 8px rgba(0,0,0,0.4);
+  }
+  .book-mock .bfoot{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    font-family:'Nunito'; font-weight:600; font-size:11px; color:#fff;
+  }
+  .book-mock .badge{ background:rgba(0,0,0,0.32); padding:3px 10px; border-radius:20px; font-weight:700; }
+
+  .about-copy .eyebrow{ color:#F3D9A8; opacity:1; }
+  .about-copy h2{ color:var(--cream); }
+  .about-copy p{ font-family:'Nunito'; font-size:15.5px; line-height:1.65; color:#E7DFC9; margin-bottom:18px; }
+  .term-list{ list-style:none; padding:0; margin:22px 0; display:flex; flex-direction:column; gap:10px; }
+  .term-list li{ display:flex; align-items:center; gap:10px; font-family:'Baloo2'; font-weight:600; font-size:15px; color:#fff; }
+  .term-list .check{
+    width:22px; height:22px; border-radius:50%; background:var(--gold);
+    display:flex; align-items:center; justify-content:center; font-size:13px; color:#3E2A12; flex-shrink:0;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding:34px 0; text-align:center; }
+  footer .fb{ font-family:'Baloo2'; font-weight:700; font-size:14px; color:var(--forest-deep); }
+  footer .ft{ font-family:'Nunito'; font-size:12.5px; color:var(--muted); margin-top:4px; }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-nav">
+        <div class="brandmark"><span class="dot"></span> EK WonderKids</div>
+        <div class="series-pill">Seeds of Wealth</div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Free companion guide</div>
+          <h1>Every Kid Deserves<br>Their Own Ready Jar</h1>
+          <p class="hero-sub">Get the free companion for <em>Ready for Rain, Ready for Stars</em> — 5 conversation questions, jar labels to cut &amp; stick, a weekly tracker, and a certificate your kid will be proud to earn.</p>
+
+          <div class="capture" id="mailerliteEmbed">
+            <div class="capture-label">Send it to my inbox 📬</div>
+            <!--
+              PEGA AQUÍ el código de embed de tu formulario de MailerLite
+              (Dashboard de MailerLite → Forms → tu formulario → Embed → HTML/JavaScript).
+              El contenedor .capture ya trae el estilo de marca (fondo blanco, sombra,
+              radio de borde) — el formulario de MailerLite heredará el ancho disponible.
+            -->
+            <div class="capture-note">Free. No spam. Just the good stuff for your family.</div>
+          </div>
+        </div>
+
+        <div class="jar-stage">
+          <svg class="jar-svg" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="150" cy="322" rx="70" ry="12" fill="rgba(20,20,10,0.15)"/>
+            <path d="M95 120 L88 300 Q88 316 106 316 L194 316 Q212 316 212 300 L205 120 Z" fill="#FBF3E3" opacity="0.28" stroke="#FBF3E3" stroke-width="4"/>
+            <path d="M100 118 L104 128 L196 128 L200 118 Z" fill="#FBF3E3" opacity="0.5"/>
+            <rect x="118" y="96" width="64" height="26" rx="6" fill="#C97B2E"/>
+            <rect x="112" y="88" width="76" height="14" rx="7" fill="#A9642A"/>
+            <g>
+              <ellipse class="coin" style="animation-delay:.05s" cx="135" cy="290" rx="26" ry="9" fill="#E8A83C" stroke="#C97B2E" stroke-width="2"/>
+              <ellipse class="coin" style="animation-delay:.15s" cx="172" cy="278" rx="26" ry="9" fill="#F3C77E" stroke="#C97B2E" stroke-width="2"/>
+              <ellipse class="coin" style="animation-delay:.25s" cx="150" cy="262" rx="26" ry="9" fill="#E8A83C" stroke="#C97B2E" stroke-width="2"/>
+              <ellipse class="coin" style="animation-delay:.35s" cx="128" cy="246" rx="26" ry="9" fill="#F3C77E" stroke="#C97B2E" stroke-width="2"/>
+              <ellipse class="coin" style="animation-delay:.45s" cx="168" cy="234" rx="24" ry="8" fill="#E8A83C" stroke="#C97B2E" stroke-width="2"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">What's inside</div>
+        <h2>Everything you need to keep the story going</h2>
+        <p class="section-sub">A short, printable companion designed to turn one bedtime read into a habit your kid actually keeps.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="icon">🌦️</div>
+          <h3>5 Conversation Questions</h3>
+          <p>Each one tied to a real moment in the book, with a tip for you underneath.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🫙</div>
+          <h3>3 Jar Labels</h3>
+          <p>Cut, stick, and start a real jar at home — Emergency, Opportunity, and Safety Net.</p>
+        </div>
+        <div class="card">
+          <div class="icon">✅</div>
+          <h3>Weekly Ready Tracker</h3>
+          <p>A simple check-off sheet to build the habit together, one week at a time.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🏅</div>
+          <h3>"I Am a Ready Kid" Certificate</h3>
+          <p>A moment of real pride when they start their very own jar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about">
+    <div class="wrap about-grid">
+      <div class="book-mock">
+        <div class="tag">Seeds of Wealth</div>
+        <div class="btitle">Ready For Rain, Ready for Stars</div>
+        <div class="bfoot"><span>EK WonderKids</span><span class="badge">Book 1</span></div>
+      </div>
+      <div class="about-copy">
+        <div class="eyebrow">About the book</div>
+        <h2>A bedtime story that teaches real financial vocabulary</h2>
+        <p>Leo doesn't understand why Dad keeps dropping coins in an old jar every night — until the day it saves them both. A warm story your child will love, built around three ideas most grown-ups never had explained to them either.</p>
+        <ul class="term-list">
+          <li><span class="check">✓</span> Emergency Fund</li>
+          <li><span class="check">✓</span> Opportunity Fund</li>
+          <li><span class="check">✓</span> Safety Net</li>
+        </ul>
+        <p style="margin-bottom:0; font-size:13.5px; opacity:0.85;">Book 1 of 4 in the Seeds of Wealth series · For curious minds, ages 4–8</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="fb">EK WonderKids</div>
+      <div class="ft">Life lessons, told as stories.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
