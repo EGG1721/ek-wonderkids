@@ -6,5 +6,19 @@
     "directory": "./",
     "binding": "ASSETS",
     "not_found_handling": "404-page"
+  },
+//Nuevas funicionalidades de Wrangler agregadas en la version 3.0.0
+  "d1_databases": [
+  {
+    "binding": "DB",
+    "database_name": "leads-db",
+    "database_id": "22f75d4e-e025-48c3-af1f-ad3a73494529"
   }
+],
+"r2_buckets": [
+  {
+    "binding": "RESOURCES",
+    "bucket_name": "ek-wonderkids-resources"
+  }
+]
 }

@@ -89,6 +89,15 @@
     font-family:'Baloo2'; font-weight:700; font-size:15px; color:var(--forest-deep); margin-bottom:10px;
   }
   .capture-form{ display:flex; gap:10px; flex-wrap:wrap; }
+  .capture-form input[type=text]{
+  flex:1 1 220px; min-width:0;
+  font-family:'Nunito'; font-weight:600; font-size:15px;
+  padding:13px 16px; border-radius:10px; border:2px solid #EADBBB; outline:none; color:var(--ink);
+  background:#FFFDF8;
+}
+.capture-form input[type=text]:focus{ border-color:var(--gold-deep); }
+.capture-form button:disabled{ opacity:0.7; cursor:default; }
+.capture-msg{ font-family:'Nunito'; font-size:12.5px; color:var(--forest-deep); margin-top:10px; min-height:16px; }
   .capture-form input[type=email]{
     flex:1 1 220px; min-width:0;
     font-family:'Nunito'; font-weight:600; font-size:15px;
@@ -202,6 +211,55 @@
               El contenedor .capture ya trae el estilo de marca (fondo blanco, sombra,
               radio de borde) — el formulario de MailerLite heredará el ancho disponible.
             -->
+              <form id="resource-form" class="capture-form">
+  <input type="text" name="name" placeholder="Your name" aria-label="Name" required>
+  <input type="email" name="email" placeholder="Your email" aria-label="Email" required>
+  <input type="hidden" name="book" value="book_en_04">
+  <button type="submit">Send it to me</button>
+</form>
+<p id="rf-message" class="capture-msg"></p>
+
+<script>
+document.getElementById('resource-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button');
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  const payload = {
+    name: form.name.value,
+    email: form.email.value,
+    book: form.book.value
+  };
+
+  try {
+    const res = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+
+    if (res.ok && data.success) {
+      document.getElementById('rf-message').textContent =
+        "You're all set! Check your email — your download is starting now.";
+      window.location.href = data.downloadUrl;
+    } else {
+      document.getElementById('rf-message').textContent =
+        data.error || 'Something went wrong, please try again.';
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  } catch (err) {
+    document.getElementById('rf-message').textContent =
+      'Connection error, please try again.';
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+});
+</script>
             <div class="capture-note">Free. No spam. Just the good stuff for your family.</div>
           </div>
         </div>

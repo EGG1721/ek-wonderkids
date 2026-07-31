@@ -1,7 +1,7 @@
-src
-functions
-.git
-.claude
-node_modules
-wrangler.jsonc
+src/
+schema.sql
 README.md
+wrangler.jsonc
+.claude/
+node_modules/
+.git/
