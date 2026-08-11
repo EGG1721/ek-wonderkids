@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initActiveNavLink();
-  initNewsletterForm();
+  //initNewsletterForm();   // ← esta función ya no existe, y truena aquí
+  initFamilyKitForm();    // ← por eso ESTA LÍNEA NUNCA SE EJECUTA
 });
 
 // ============ Mobile nav toggle ============
@@ -49,57 +50,57 @@ function initActiveNavLink() {
 }
 
 // ============ Newsletter form ============
-function initNewsletterForm() {
-  const form = document.getElementById('subscribeForm');
-  const emailInput = document.getElementById('email');
-  const note = document.getElementById('newsletterNote');
-  if (!form || !emailInput || !note) return;
+function initFamilyKitForm() {
+  const form = document.getElementById('resource-form-kit');
+  if (!form) return;
 
-  const defaultNote = note.textContent;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button');
+    const note = document.getElementById('kitNote');
+    const originalText = btn.textContent;
 
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const email = emailInput.value.trim();
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    note.textContent = '';
 
-    if (!isValidEmail(email)) {
-      note.textContent = 'Please enter a valid email address.';
-      note.style.color = '#fff';
-      note.style.fontWeight = '700';
-      return;
-    }
-
-    note.textContent = 'Sending...';
-    note.style.color = '';
-    note.style.fontWeight = '';
+    const payload = {
+      name: form.name.value,
+      email: form.email.value,
+      book: form.book.value // "family_kit"
+    };
 
     try {
-      const response = await fetch('/subscribe', {
+      const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify(payload)
       });
+      const data = await res.json();
 
-      const data = await response.json();
+      if (res.ok && data.success) {
+        // Swap to success state instead of leaving the page
+        document.getElementById('kitFormWrap').style.display = 'none';
+        document.getElementById('kitSuccess').style.display = 'block';
 
-      if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong.');
+        // Dispara la descarga sin sacar al usuario de la página
+        const dl = document.createElement('iframe');
+        dl.style.display = 'none';
+        dl.src = data.downloadUrl;
+        document.body.appendChild(dl);
+      } else {
+        note.textContent = data.error || 'Something went wrong, please try again.';
+        note.style.color = '#fff';
+        note.style.fontWeight = '700';
+        btn.disabled = false;
+        btn.textContent = originalText;
       }
-
-      note.textContent = "Thank you! You're now subscribed.";
+    } catch (err) {
+      note.textContent = 'Connection error, please try again.';
       note.style.color = '#fff';
       note.style.fontWeight = '700';
-      form.reset();
-
-      setTimeout(() => {
-        note.textContent = defaultNote;
-        note.style.color = '';
-        note.style.fontWeight = '';
-      }, 5000);
-
-    } catch (error) {
-      note.textContent = error.message;
-      note.style.color = '#fff';
-      note.style.fontWeight = '700';
+      btn.disabled = false;
+      btn.textContent = originalText;
     }
   });
 }

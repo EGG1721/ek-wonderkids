@@ -11,22 +11,11 @@
 // Mapa de recursos: agrega una entrada por cada libro que tenga su propio lead magnet.
 // El "key" debe coincidir EXACTO con el nombre del archivo que subas a R2.
 const RESOURCES = {
-  book01: {
-    key: "the-waiting-jar-guia.pdf",
-    title: "The Waiting Jar — Parent Guide",
-  },
-  book02: {
-    key: "the-grand-spring-festival-guia.pdf",
-    title: "The Grand Spring Festival — Parent Guide",
-  },
-  book03: {
-    key: "when-compass-pointed-north-guia.pdf",
-    title: "When the Compass Pointed North — Parent Guide",
-  },
-  book_en_04: {
-    key: "ready-for-the-rain-guia.pdf",
-    title: "Ready for the Rain — Parent Guide",
-  },
+  book01: { key: "the-waiting-jar-guia.pdf", title: "The Waiting Jar — Parent Guide" },
+  book02: { key: "the-grand-spring-festival-guia.pdf", title: "The Grand Spring Festival — Parent Guide" },
+  book03: { key: "when-compass-pointed-north-guia.pdf", title: "When the Compass Pointed North — Parent Guide" },
+  book_en_04: { key: "ready-for-the-rain-guia.pdf", title: "Ready for the Rain — Parent Guide" },
+  family_kit: { key: "wonderkids-family-kit.pdf", title: "The WonderKids Family Kit" },
 };
 
 export default {
@@ -274,3 +263,4 @@ function escapeHtml(str) {
     (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
   );
 }
+
