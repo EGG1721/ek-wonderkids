@@ -649,3 +649,152 @@ a { color: inherit; }
   .method-mini-grid{ grid-template-columns:1fr 1fr; }
   .worlds-grid{ grid-template-columns:1fr; }
 }
+
+.section--problem{
+  background:#fff;
+  padding:100px 28px;
+  text-align:center;
+}
+.problem-wrap{
+  max-width:720px;
+  margin:0 auto;
+}
+.problem-title{
+  font-family:'Nunito', sans-serif;
+  font-weight:900;
+  font-size:clamp(26px, 3.6vw, 38px);
+  line-height:1.3;
+  color:#1a1a2e;
+  margin:18px 0 28px;
+}
+.problem-title-soft{
+  color:#6b6b6b;
+  font-weight:700;
+}
+.problem-body{
+  font-family:'Nunito', sans-serif;
+  font-weight:600;
+  font-size:17px;
+  line-height:1.75;
+  color:#3a3a4a;
+  margin:0 auto 26px;
+  max-width:600px;
+}
+.problem-highlight{
+  font-family:'Nunito', sans-serif;
+  font-weight:800;
+  font-size:21px;
+  color:#C97B2E;
+  margin:0 0 22px;
+}
+.problem-supporting{
+  font-family:'Nunito', sans-serif;
+  font-weight:600;
+  font-size:15.5px;
+  line-height:1.7;
+  color:#6b6b6b;
+  max-width:560px;
+  margin:0 auto;
+}
+
+@media (max-width:600px){
+  .section--problem{ padding:64px 24px; }
+}
+.section--problem{
+  background: linear-gradient(180deg, #fff 0%, #FFFBF2 100%);
+  padding:80px 28px 70px;
+  text-align:center;
+  position:relative;
+}
+.problem-wrap{
+  max-width:720px;
+  margin:0 auto;
+  position:relative;
+}
+
+/* acento decorativo — una comilla grande y sutil detrás del H2 */
+.problem-wrap::before{
+  content:"❝";
+  position:absolute;
+  top:-38px; left:50%;
+  transform:translateX(-50%);
+  font-size:90px;
+  font-family:Georgia, serif;
+  color:#F5C15E;
+  opacity:0.25;
+  line-height:1;
+  z-index:0;
+}
+
+.problem-title{
+  font-family:'Nunito', sans-serif;
+  font-weight:900;
+  font-size:clamp(26px, 3.6vw, 38px);
+  line-height:1.3;
+  color:#1a1a2e;
+  margin:18px 0 26px;
+  position:relative;
+}
+.problem-title-soft{
+  color:#6b6b6b;
+  font-weight:700;
+}
+.problem-body{
+  font-family:'Nunito', sans-serif;
+  font-weight:600;
+  font-size:17px;
+  line-height:1.75;
+  color:#3a3a4a;
+  margin:0 auto 26px;
+  max-width:600px;
+}
+
+/* la línea de "alivio" con marco visual, no solo texto suelto */
+.problem-highlight-box{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#fff;
+  border:2px solid #F5C15E;
+  border-radius:40px;
+  padding:12px 28px;
+  margin:0 0 26px;
+  box-shadow:0 6px 18px rgba(197,123,46,0.12);
+}
+.problem-highlight-box .spark{ font-size:18px; }
+.problem-highlight{
+  font-family:'Nunito', sans-serif;
+  font-weight:800;
+  font-size:16.5px;
+  color:#C97B2E;
+  margin:0;
+}
+
+.problem-supporting{
+  font-family:'Nunito', sans-serif;
+  font-weight:600;
+  font-size:15.5px;
+  line-height:1.7;
+  color:#6b6b6b;
+  max-width:560px;
+  margin:0 auto;
+}
+
+/* pequeños íconos de las "big lessons" mencionadas — le dan textura visual */
+.problem-tags{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:34px;
+}
+.problem-tag{
+  font-family:'Nunito'; font-weight:700; font-size:12.5px;
+  background:#fff; border:1px solid #eee; border-radius:20px;
+  padding:8px 16px; color:#4a4a4a;
+}
+
+@media (max-width:600px){
+  .section--problem{ padding:56px 24px 48px; }
+  .problem-wrap::before{ font-size:64px; top:-24px; }
+}
