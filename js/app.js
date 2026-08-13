@@ -83,6 +83,13 @@ function initFamilyKitForm() {
         document.getElementById('kitFormWrap').style.display = 'none';
         document.getElementById('kitSuccess').style.display = 'block';
 
+        gtag('event', 'email_signup', { resource: 'book_en_04', source_page: 'book_en_04_hero' });
+        gtag('event', 'free_resource_download', { resource: 'book_en_04' });
+        gtag('event', 'email_signup', { resource: 'family_kit', source_page: 'index_newsletter' });
+        gtag('event', 'free_resource_download', { resource: 'family_kit' });
+        gtag('event', 'email_signup', { resource: 'book_en_04', source_page: 'seeds_of_wealth_landing' });
+        gtag('event', 'free_resource_download', { resource: 'book_en_04' });
+
         // Dispara la descarga sin sacar al usuario de la página
         const dl = document.createElement('iframe');
         dl.style.display = 'none';

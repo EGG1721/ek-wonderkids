@@ -243,9 +243,30 @@ document.getElementById('resource-form').addEventListener('submit', async (e) =>
     const data = await res.json();
 
     if (res.ok && data.success) {
-      document.getElementById('rf-message').textContent =
-        "You're all set! Check your email — your download is starting now.";
-      window.location.href = data.downloadUrl;
+      // Reemplaza el formulario por un mensaje de éxito con siguientes pasos,
+      // en vez de sacar al usuario de la página
+      document.getElementById('mailerliteEmbed').innerHTML = `
+        <div style="text-align:center; padding:8px 4px 4px;">
+          <div style="font-size:40px; margin-bottom:8px;">🎉</div>
+          <h3 style="font-family:'Baloo2'; font-weight:700; font-size:19px; color:var(--forest-deep); margin:0 0 8px;">You're all set!</h3>
+          <p style="font-family:'Nunito'; font-size:14px; color:var(--muted); line-height:1.5; margin:0 0 16px;">Your download is starting now, and a copy is on its way to your inbox too.</p>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="https://www.amazon.com/-/es/EK-WonderKids-ebook/dp/B0HC4V7Q6V/" target="_blank" rel="noopener" style="font-family:'Baloo2'; font-weight:700; font-size:14px; text-decoration:none; padding:12px 18px; border-radius:10px; background:var(--gold-deep); color:#fff;">Loved it? Get the full book on Amazon ★</a>
+            <a href="/seeds-of-wealth.html" style="font-family:'Baloo2'; font-weight:700; font-size:14px; text-decoration:none; padding:12px 18px; border-radius:10px; background:#fff; color:var(--forest-deep); border:2px solid #EADBBB;">See the whole Seeds of Wealth series →</a>
+            <a href="https://www.pinterest.com/ekwonderkids/" target="_blank" rel="noopener" style="font-family:'Baloo2'; font-weight:700; font-size:14px; text-decoration:none; padding:12px 18px; border-radius:10px; background:#fff; color:var(--forest-deep); border:2px solid #EADBBB;">Follow us on Pinterest for more free ideas</a>
+          </div>
+        </div>
+      `;
+
+      // Dispara la descarga sin sacar al usuario de la página
+      const dl = document.createElement('iframe');
+      dl.style.display = 'none';
+      dl.src = data.downloadUrl;
+      document.body.appendChild(dl);
+
+      // Eventos de GA4
+      gtag('event', 'email_signup', { resource: 'book_en_04', source_page: 'book_en_04_hero' });
+      gtag('event', 'free_resource_download', { resource: 'book_en_04' });
     } else {
       document.getElementById('rf-message').textContent =
         data.error || 'Something went wrong, please try again.';
@@ -262,6 +283,13 @@ document.getElementById('resource-form').addEventListener('submit', async (e) =>
 </script>
             <div class="capture-note">Free. No spam. Just the good stuff for your family.</div>
           </div>
+          <div class="capture-note">Free. No spam. Just the good stuff for your family.</div>
+          </div>
+
+          <p style="font-family:'Nunito'; font-weight:700; font-size:13.5px; color:#3E2A12; margin-top:20px;">
+            Already know you want it? <a href="https://www.amazon.com/-/es/EK-WonderKids-ebook/dp/B0HC4V7Q6V/" target="_blank" rel="noopener" style="text-decoration:underline;">Buy on Amazon →</a>
+          </p>
+        </div>
         </div>
 
         <div class="jar-stage">
@@ -334,6 +362,9 @@ document.getElementById('resource-form').addEventListener('submit', async (e) =>
         </ul>
         <p style="margin-bottom:0; font-size:13.5px; opacity:0.85;">Book 1 of 4 in the Seeds of Wealth series · For curious minds, ages 4–8</p>
       </div>
+      <p style="margin-bottom:20px; font-size:13.5px; opacity:0.85;">Book 1 of 4 in the Seeds of Wealth series · For curious minds, ages 4–8</p>
+        <a href="https://www.amazon.com/-/es/EK-WonderKids-ebook/dp/B0HC4V7Q6V/" target="_blank" rel="noopener" style="display:inline-block; font-family:'Baloo2'; font-weight:700; font-size:14px; background:var(--gold); color:#3E2A12; padding:12px 24px; border-radius:10px; text-decoration:none;">Get the Full Book on Amazon ★</a>
+      </div>
     </div>
   </section>
 
@@ -343,6 +374,15 @@ document.getElementById('resource-form').addEventListener('submit', async (e) =>
       <div class="ft">Life lessons, told as stories.</div>
     </div>
   </footer>
-
+<script>
+  document.querySelectorAll('a[href*="amazon.com"]').forEach(link => {
+    link.addEventListener('click', () => {
+      gtag('event', 'amazon_click', {
+        source_page: window.location.pathname,
+        link_text: link.textContent.trim().slice(0, 60)
+      });
+    });
+  });
+</script>
 </body>
 </html>

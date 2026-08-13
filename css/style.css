@@ -628,3 +628,24 @@ a { color: inherit; }
   .wealth-feature{ grid-template-columns:1fr; padding-bottom: 8px; }
   .wealth-feature-body{ padding: 4px 28px 32px; }
 }
+
+.section--method{ background:#fff; }
+.method-mini-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; max-width:960px; margin:0 auto 48px; }
+.method-mini{ text-align:center; padding:20px 14px; }
+.method-mini .icon{ font-size:30px; margin-bottom:8px; }
+.method-mini h3{ font-family:'Nunito'; font-weight:800; font-size:14.5px; margin:0 0 4px; }
+.method-mini p{ font-family:'Nunito'; font-size:12.5px; color:#6b6b6b; margin:0; }
+
+.worlds-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:960px; margin:0 auto; }
+.world-card{ border-radius:16px; padding:28px 22px; text-align:center; color:#fff; }
+.world-card .w-icon{ font-size:36px; margin-bottom:10px; }
+.world-card h3{ font-family:'Nunito'; font-weight:800; font-size:17px; margin:0 0 6px; }
+.world-card p{ font-family:'Nunito'; font-size:13px; opacity:0.9; margin:0; }
+.world-card--purple{ background:#6B4C9A; }
+.world-card--gold{ background:#C97B2E; }
+.world-card--blue{ background:#1E5FA8; }
+
+@media (max-width:760px){
+  .method-mini-grid{ grid-template-columns:1fr 1fr; }
+  .worlds-grid{ grid-template-columns:1fr; }
+}

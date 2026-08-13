@@ -273,6 +273,15 @@ document.getElementById('resource-form').addEventListener('submit', async (e) =>
   </footer>
  
 </div>
- 
+<script>
+  document.querySelectorAll('a[href*="amazon.com"]').forEach(link => {
+    link.addEventListener('click', () => {
+      gtag('event', 'amazon_click', {
+        source_page: window.location.pathname,
+        link_text: link.textContent.trim().slice(0, 60)
+      });
+    });
+  });
+</script> 
 </body>
 </html>

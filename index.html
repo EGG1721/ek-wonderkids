@@ -143,7 +143,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZ09833VVP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZ09833VVP');
+</script>
 </head>
+
 <body>
 <div class="launch-banner">
   🎉 NOW AVAILABLE — <em>Ready For Rain, Ready for Stars</em> is here! <a href="/book_en_04.html">Get the free companion →</a>
@@ -167,6 +177,7 @@
 </header>
 
 <!-- ══ HERO ══ -->
+
 <section id="hero" class="hero">
   <div class="hero-bg-dots"></div>
   <div class="hero-bg-glow"></div>
@@ -205,6 +216,39 @@
   <svg class="hero-wave" viewBox="0 0 1200 80" preserveAspectRatio="none">
     <path d="M0,80 L0,44 Q200,8 400,44 Q600,80 800,44 Q1000,8 1200,44 L1200,80 Z" fill="#fff" />
   </svg>
+</section>
+ <!-- ══ NOT JUST BOOKS — BRAND FRAME ══ -->
+<section id="method" class="section section--method">
+  <div class="section-header">
+    <div class="eyebrow eyebrow-gold-dark">✦ MORE THAN BOOKS ✦</div>
+    <h2 class="section-title">Tools For Growing Minds</h2>
+    <p class="section-subtitle">Every EK WonderKids story comes with something most books don't: a way to keep the lesson going after the last page.</p>
+  </div>
+
+  <div class="method-mini-grid">
+    <div class="method-mini"><div class="icon">📖</div><h3>Read the Story</h3><p>A character your child will remember.</p></div>
+    <div class="method-mini"><div class="icon">💬</div><h3>Talk About It</h3><p>Real conversation starters, not quizzes.</p></div>
+    <div class="method-mini"><div class="icon">🎯</div><h3>Practice Together</h3><p>A free activity that makes it stick.</p></div>
+    <div class="method-mini"><div class="icon">🌱</div><h3>Watch It Grow</h3><p>The habit — and the next story — build on it.</p></div>
+  </div>
+
+  <div class="worlds-grid">
+    <div class="world-card world-card--purple">
+      <div class="w-icon">💛</div>
+      <h3>Stories with Heart</h3>
+      <p>Character, patience &amp; courage — tools for the big feelings.</p>
+    </div>
+    <div class="world-card world-card--gold">
+      <div class="w-icon">🌱</div>
+      <h3>Seeds of Wealth</h3>
+      <p>Real financial vocabulary — tools for money confidence.</p>
+    </div>
+    <div class="world-card world-card--blue">
+      <div class="w-icon">🚀</div>
+      <h3>Little Heroes at Work</h3>
+      <p>Career curiosity — tools for dreaming big.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ══ STORY BOOKS ══ -->
@@ -361,28 +405,28 @@
       </div>
     </div>
     <div class="about-content">
-      <div class="eyebrow eyebrow-gold">✦ OUR MISSION ✦</div>
-      <h2 class="about-title">Preparing little minds<br />for big futures.</h2>
-      <p class="about-text">EK WonderKids creates thoughtfully designed books that help children explore the world of work, build confidence, and spark a lifelong love of learning — all through the joy of creativity and play.</p>
-      <div class="mission-badges">
-        <div class="mission-badge">
-          <div class="mission-icon">🎨</div>
-          <div class="mission-name">Creative Learning</div>
-          <div class="mission-sub">Color while you grow</div>
-        </div>
-        <div class="mission-badge">
-          <div class="mission-icon">🚀</div>
-          <div class="mission-name">Career Curiosity</div>
-          <div class="mission-sub">Dream big from day one</div>
-        </div>
-        <div class="mission-badge">
-          <div class="mission-icon">⭐</div>
-          <div class="mission-name">Kid-Approved Fun</div>
-          <div class="mission-sub">Joy on every page</div>
-        </div>
-      </div>
+      <div class="about-content">
+  <div class="eyebrow eyebrow-gold">✦ OUR MISSION ✦</div>
+  <h2 class="about-title">More than books.<br />A growing world of learning.</h2>
+  <p class="about-text">EK WonderKids creates stories, activities, and family tools that help children build the character, confidence, and real-world skills they need for life. Every story introduces an idea. Every free activity helps your child practice it. Every conversation at home helps it grow.</p>
+  <div class="mission-badges">
+    <div class="mission-badge">
+      <div class="mission-icon">💛</div>
+      <div class="mission-name">Character &amp; Courage</div>
+      <div class="mission-sub">Tools for big feelings</div>
+    </div>
+    <div class="mission-badge">
+      <div class="mission-icon">🌱</div>
+      <div class="mission-name">Money Confidence</div>
+      <div class="mission-sub">Tools for real-world skills</div>
+    </div>
+    <div class="mission-badge">
+      <div class="mission-icon">🚀</div>
+      <div class="mission-name">Big Dreams</div>
+      <div class="mission-sub">Tools for future curiosity</div>
     </div>
   </div>
+</div>
 </section>
 
 <svg class="wave" viewBox="0 0 1200 72" preserveAspectRatio="none">
@@ -490,5 +534,15 @@
 </footer>
 
 <script src="js/app.js"></script>
+<script>
+  document.querySelectorAll('a[href*="amazon.com"]').forEach(link => {
+    link.addEventListener('click', () => {
+      gtag('event', 'amazon_click', {
+        source_page: window.location.pathname,
+        link_text: link.textContent.trim().slice(0, 60)
+      });
+    });
+  });
+</script>
 </body>
 </html>

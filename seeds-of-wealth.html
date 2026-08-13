@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seeds of Wealth — Financial Literacy Books for Kids | EK WonderKids</title>
+<meta name="description" content="Seeds of Wealth helps parents introduce real financial concepts through stories children can understand — and conversations families can continue at home. Ages 4-8.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#E8A83C; --gold-deep:#C97B2E; --forest:#3A5A45; --forest-deep:#24382A;
+    --cream:#FBF3E3; --ink:#2E2418; --muted:#6B5B45;
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{ margin:0; font-family:'Nunito',sans-serif; color:var(--ink); background:var(--cream); -webkit-font-smoothing:antialiased; }
+  img,svg{display:block; max-width:100%;} a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+  h1,h2{font-family:'Baloo2';}
+
+  /* NAV */
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:22px 28px; }
+  .brandmark{ font-family:'Baloo2'; font-weight:700; font-size:17px; color:var(--forest-deep); display:flex; align-items:center; gap:8px; }
+  .nav a.home{ font-family:'Nunito'; font-weight:700; font-size:13px; color:var(--muted); text-decoration:none; }
+
+  /* HERO */
+  .hero{
+    position:relative; overflow:hidden; padding:20px 0 60px;
+    background: radial-gradient(1100px 600px at 15% -10%, rgba(255,255,255,0.25), transparent 60%),
+      linear-gradient(155deg, #F3C77E 0%, #E8A559 32%, #C97B2E 78%, #3A5A45 140%);
+  }
+  .eyebrow{ font-family:'Nunito'; font-weight:700; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:#3E2A12; opacity:0.8; margin-bottom:14px; }
+  .hero h1{ font-weight:800; font-size:clamp(30px,4.4vw,46px); line-height:1.1; color:var(--forest-deep); margin:0 0 18px; max-width:680px; }
+  .hero-sub{ font-family:'Nunito'; font-weight:600; font-size:17px; line-height:1.6; color:#3E2A12; max-width:560px; margin-bottom:30px; }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{ font-family:'Baloo2'; font-weight:700; font-size:15px; padding:14px 26px; border-radius:12px; text-decoration:none; display:inline-block; }
+  .btn-primary{ background:var(--forest-deep); color:#FFF8EA; }
+  .btn-secondary{ background:rgba(255,255,255,0.85); color:var(--forest-deep); }
+
+  /* METHOD */
+  .section{ padding:64px 0; }
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 44px; }
+  .section-eyebrow{ font-family:'Nunito'; font-weight:700; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:10px; }
+  h2{ font-weight:700; font-size:clamp(24px,3vw,32px); color:var(--forest-deep); margin:0 0 10px; }
+  .section-sub{ font-family:'Nunito'; font-size:15.5px; color:var(--muted); line-height:1.6; }
+  .method-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  @media (max-width:860px){ .method-grid{grid-template-columns:1fr 1fr;} }
+  .method-card{ background:#fff; border:1px solid #EFE4C9; border-radius:14px; padding:26px 20px; text-align:center; }
+  .method-card .n{ font-family:'Baloo2'; font-weight:700; font-size:12px; color:var(--gold-deep); letter-spacing:0.1em; margin-bottom:10px; }
+  .method-card .icon{ font-size:34px; margin-bottom:10px; }
+  .method-card h3{ font-family:'Baloo2'; font-weight:700; font-size:16.5px; color:var(--forest-deep); margin:0 0 6px; }
+  .method-card p{ font-family:'Nunito'; font-size:13px; color:var(--muted); line-height:1.5; margin:0; }
+
+  /* FEATURED BOOK */
+  .featured{ background:var(--forest-deep); color:var(--cream); }
+  .feat-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:44px; align-items:center; }
+  @media (max-width:820px){ .feat-grid{grid-template-columns:1fr;} }
+  .book-mock{ aspect-ratio:1/1; border-radius:14px; background:linear-gradient(160deg,#F3C77E 0%,#E8A559 30%,#C97B2E 62%,#3A5A45 100%);
+    display:flex; flex-direction:column; justify-content:space-between; padding:26px; box-shadow:0 20px 44px rgba(0,0,0,0.35); }
+  .book-mock .tag{ font-family:'Nunito'; font-weight:700; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:#fff; text-shadow:0 2px 5px rgba(0,0,0,0.4); }
+  .book-mock .btitle{ font-family:'Baloo2'; font-weight:800; font-size:26px; color:#fff; line-height:1.06; text-shadow:0 3px 8px rgba(0,0,0,0.4); }
+  .book-mock .bfoot{ display:flex; justify-content:space-between; align-items:flex-end; font-family:'Nunito'; font-weight:600; font-size:11px; color:#fff; }
+  .book-mock .badge{ background:rgba(0,0,0,0.32); padding:3px 10px; border-radius:20px; font-weight:700; }
+  .feat-copy .eyebrow{ color:#F3D9A8; opacity:1; }
+  .feat-copy h2{ color:var(--cream); }
+  .concept-pill{ display:inline-block; background:var(--gold); color:#3E2A12; font-family:'Baloo2'; font-weight:700; font-size:13px; padding:7px 16px; border-radius:20px; margin-bottom:16px; }
+  .feat-copy p{ font-family:'Nunito'; font-size:15.5px; line-height:1.65; color:#E7DFC9; margin-bottom:22px; }
+  .feat-copy .btn-primary{ background:var(--gold); color:#3E2A12; }
+
+  /* LEAD MAGNET */
+  .magnet{ text-align:center; padding:64px 0 72px; }
+  .magnet .capture{ background:#fff; border-radius:16px; padding:26px; max-width:460px; margin:26px auto 0; box-shadow:0 18px 40px rgba(36,56,42,0.12); text-align:left; }
+  .capture-form{ display:flex; flex-direction:column; gap:10px; }
+  .capture-form input{ font-family:'Nunito'; font-weight:600; font-size:15px; padding:13px 16px; border-radius:10px; border:2px solid #EADBBB; outline:none; background:#FFFDF8; }
+  .capture-form input:focus{ border-color:var(--gold-deep); }
+  .capture-form button{ font-family:'Baloo2'; font-weight:700; font-size:15px; color:#FFF8EA; background:var(--forest-deep); border:none; border-radius:10px; padding:13px 22px; cursor:pointer; }
+  .capture-msg{ font-family:'Baloo2'; font-weight:700; font-size:13px; color:var(--forest-deep); margin-top:8px; min-height:16px; }
+  .capture-note{ font-family:'Nunito'; font-size:12px; color:#7A6A50; margin-top:8px; }
+
+  /* SERIES ROADMAP */
+  .roadmap-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  @media (max-width:860px){ .roadmap-grid{grid-template-columns:1fr 1fr;} }
+  .roadmap-card{ background:#fff; border:1px solid #EFE4C9; border-radius:14px; padding:20px; }
+  .roadmap-card .num{ font-family:'Baloo2'; font-weight:800; font-size:22px; color:var(--gold-deep); margin-bottom:8px; }
+  .roadmap-card h3{ font-family:'Baloo2'; font-weight:700; font-size:15px; color:var(--forest-deep); margin:0 0 6px; }
+  .roadmap-card p{ font-family:'Nunito'; font-size:12.5px; color:var(--muted); margin:0; }
+  .roadmap-card.available{ border-color:var(--gold-deep); background:#FFF8EA; }
+  .status{ font-family:'Nunito'; font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--gold-deep); }
+
+  footer{ padding:34px 0; text-align:center; }
+  footer .fb{ font-family:'Baloo2'; font-weight:700; font-size:14px; color:var(--forest-deep); }
+  footer .ft{ font-family:'Nunito'; font-size:12.5px; color:var(--muted); margin-top:4px; }
+</style>
+</head>
+<body>
+
+  <div class="nav">
+    <div class="brandmark">🌱 EK WonderKids</div>
+    <a href="/" class="home">← Back to Home</a>
+  </div>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Seeds of Wealth</div>
+      <h1>Raising Money-Smart Kids Starts Earlier Than You Think.</h1>
+      <p class="hero-sub">Seeds of Wealth helps parents introduce real financial concepts through stories children can understand — and conversations families can continue at home. No worksheets. No jargon. Just a story your kid will beg to reread.</p>
+      <div class="hero-ctas">
+        <a href="#featured" class="btn btn-primary">Discover Book 1 →</a>
+        <a href="#magnet" class="btn btn-secondary">Get a Free Family Activity</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">The EK WonderKids Method</div>
+        <h2>Read. Talk. Practice. Grow.</h2>
+        <p class="section-sub">Every Seeds of Wealth book follows the same simple loop — so the lesson doesn't end when the story does.</p>
+      </div>
+      <div class="method-grid">
+        <div class="method-card"><div class="n">STEP 1</div><div class="icon">📖</div><h3>Read the Story</h3><p>A warm, illustrated story your child will want to hear again.</p></div>
+        <div class="method-card"><div class="n">STEP 2</div><div class="icon">💬</div><h3>Talk About It</h3><p>Simple conversation questions tied to real moments in the book.</p></div>
+        <div class="method-card"><div class="n">STEP 3</div><div class="icon">🎯</div><h3>Practice Together</h3><p>A hands-on family activity that makes the idea stick.</p></div>
+        <div class="method-card"><div class="n">STEP 4</div><div class="icon">🌱</div><h3>Watch It Grow</h3><p>The habit — and the next book — builds on what they just learned.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section featured" id="featured">
+    <div class="wrap feat-grid">
+      <div class="book-mock">
+        <div class="tag">Seeds of Wealth · Book 1</div>
+        <div class="btitle">Ready For Rain, Ready for Stars</div>
+        <div class="bfoot"><span>EK WonderKids</span><span class="badge">Now Available</span></div>
+      </div>
+      <div class="feat-copy">
+        <div class="eyebrow">Book 1 · Now Available</div>
+        <span class="concept-pill">Concept: Emergency Fund</span>
+        <h2>A Story About Preparation and Saving</h2>
+        <p>Leo doesn't understand why Dad keeps dropping coins into an old jar every night — until the day it saves them both. A warm story that teaches real financial vocabulary through the people your child already loves.</p>
+        <a href="/book_en_04.html" class="btn btn-primary">Get the Free Companion + Sneak Peek →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section magnet" id="magnet">
+    <div class="wrap">
+      <div class="section-eyebrow">Free Family Activity</div>
+      <h2>Continue Leo's Lesson at Home</h2>
+      <p class="section-sub">Get Leo's Ready Jar Companion — 5 conversation questions, jar labels, a weekly tracker, and a certificate your kid will be proud to earn.</p>
+
+      <div class="capture" id="captureWrap">
+        <form id="sow-form" class="capture-form">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Your email" required>
+          <input type="hidden" name="book" value="book_en_04">
+          <button type="submit">Send Me the Free Activity →</button>
+        </form>
+        <p id="sow-msg" class="capture-msg"></p>
+        <div class="capture-note">Free. No spam. Just the good stuff for your family.</div>
+      </div>
+
+      <div class="capture" id="successWrap" style="display:none; text-align:center;">
+        <div style="font-size:34px; margin-bottom:8px;">🎉</div>
+        <div style="font-family:'Baloo2'; font-weight:700; font-size:17px; color:var(--forest-deep); margin-bottom:8px;">You're all set!</div>
+        <p style="font-family:'Nunito'; font-size:14px; color:var(--muted); margin:0;">Check your inbox — your download is on its way.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('sow-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button');
+      const msg = document.getElementById('sow-msg');
+      const original = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Sending...';
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: form.name.value, email: form.email.value, book: form.book.value })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          document.getElementById('captureWrap').style.display = 'none';
+          document.getElementById('successWrap').style.display = 'block';
+          const dl = document.createElement('iframe');
+          dl.style.display = 'none'; dl.src = data.downloadUrl;
+          document.body.appendChild(dl);
+        } else {
+          msg.textContent = data.error || 'Something went wrong, please try again.';
+          btn.disabled = false; btn.textContent = original;
+        }
+      } catch (err) {
+        msg.textContent = 'Connection error, please try again.';
+        btn.disabled = false; btn.textContent = original;
+      }
+    });
+  </script>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">The Series</div>
+        <h2>4 Books. 4 Ideas Every Kid Should Know.</h2>
+        <p class="section-sub">Follow Leo (and his friend Cooper) as they learn — one everyday moment at a time.</p>
+      </div>
+      <div class="roadmap-grid">
+        <div class="roadmap-card available">
+          <div class="status">Now Available</div>
+          <div class="num">01</div>
+          <h3>Ready for Rain, Ready for Stars</h3>
+          <p>Emergency Fund · Opportunity Fund · Safety Net</p>
+        </div>
+        <div class="roadmap-card">
+          <div class="status">Coming Next</div>
+          <div class="num">02</div>
+          <h3>The Price of Almost</h3>
+          <p>Needs vs. Wants · Opportunity Cost · Delayed Gratification</p>
+        </div>
+        <div class="roadmap-card">
+          <div class="status">Coming Soon</div>
+          <div class="num">03</div>
+          <h3>Book 3</h3>
+          <p>Compound Growth · Assets vs. Liabilities</p>
+        </div>
+        <div class="roadmap-card">
+          <div class="status">Coming Soon</div>
+          <div class="num">04</div>
+          <h3>Book 4</h3>
+          <p>Diversification · Giving Back · Legacy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="fb">EK WonderKids</div>
+      <div class="ft">Life lessons, told as stories.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
