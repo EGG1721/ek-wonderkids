@@ -1,0 +1,18 @@
+/* =========================================
+   EK WONDERKIDS — LANGUAGE SWITCHER
+   Shared by all languages
+   ========================================= */
+.language-switcher{position:relative;display:inline-flex;align-items:center;margin-right:14px;font-family:'Nunito',sans-serif;z-index:1000;}
+.language-current{display:flex;align-items:center;justify-content:center;gap:6px;min-width:62px;padding:7px 12px;border:1px solid rgba(255,255,255,.25);border-radius:20px;background:rgba(255,255,255,.12);color:inherit;font-family:inherit;font-size:12.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;transition:background .2s ease,border-color .2s ease;}
+.language-current:hover{background:rgba(255,255,255,.2);}
+.language-current:focus-visible,.language-option:focus-visible{outline:3px solid rgba(255,196,71,.75);outline-offset:2px;}
+.language-arrow{font-size:10px;transition:transform .2s ease;}
+.language-switcher.is-open .language-arrow{transform:rotate(180deg);}
+.language-menu{position:absolute;top:calc(100% + 9px);right:0;min-width:175px;padding:7px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.12);opacity:0;visibility:hidden;transform:translateY(-5px);transition:opacity .18s ease,transform .18s ease,visibility .18s ease;}
+.language-switcher.is-open .language-menu{opacity:1;visibility:visible;transform:translateY(0);}
+.language-option{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:9px 11px;border-radius:8px;text-decoration:none;color:#24382a;font-size:13px;font-weight:700;transition:background .15s ease,color .15s ease;}
+.language-option:hover{background:#fbf3e3;}
+.language-option.is-active{background:#fbf3e3;color:#c97b2e;}
+.language-option.is-active::after{content:"✓";margin-left:auto;font-size:12px;font-weight:900;}
+.language-short{font-size:11px;font-weight:900;opacity:.65;}
+@media(max-width:768px){.language-switcher{width:100%;margin:12px 0;display:block}.language-current{width:100%;justify-content:space-between}.language-menu{position:static;width:100%;margin-top:7px;display:none;opacity:1;visibility:visible;transform:none;box-shadow:none}.language-switcher.is-open .language-menu{display:block}}

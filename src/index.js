@@ -15,6 +15,9 @@ const RESOURCES = {
   book02: { key: "the-grand-spring-festival-guia.pdf", title: "The Grand Spring Festival — Parent Guide" },
   book03: { key: "when-compass-pointed-north-guia.pdf", title: "When the Compass Pointed North — Parent Guide" },
   book_en_04: { key: "ready-for-the-rain-guia.pdf", title: "Ready for the Rain — Parent Guide" },
+  // Temporalmente reutiliza el mismo archivo R2 del recurso EN para no romper la entrega.
+  // Cuando exista el PDF español, cambia SOLO `key` por el nombre del objeto español en R2.
+  book_es_04: { key: "listo-para-la-lluvia-listo-para-las-estrellas-guia.pdf", title: "Listo para la Lluvia, Listo para las Estrellas — Recurso para Padres" },
   family_kit: { key: "wonderkids-family-kit.pdf", title: "The WonderKids Family Kit" },
 };
 
@@ -138,6 +141,7 @@ async function handleResourceSubscribe(request, env) {
     const name = (data.name || "").trim();
     const email = (data.email || "").trim().toLowerCase();
     const bookId = data.book;
+    const language = data.language === "es" ? "es" : "en";
 
     if (!name || !email || !RESOURCES[bookId]) {
       return Response.json({ error: "Datos incompletos" }, { status: 400 });
@@ -149,16 +153,32 @@ async function handleResourceSubscribe(request, env) {
     const resource = RESOURCES[bookId];
     const token = crypto.randomUUID();
 
-    await env.DB.prepare(
-      `INSERT INTO leads (name, email, book, resource_key, token) VALUES (?, ?, ?, ?, ?)`
-    )
-      .bind(name, email, bookId, resource.key, token)
-      .run();
+    // Intentamos guardar el idioma si la migración ya fue aplicada.
+    // Si todavía no existe la columna `language`, hacemos fallback al INSERT anterior
+    // para no interrumpir capturas durante el despliegue.
+    try {
+      await env.DB.prepare(
+        `INSERT INTO leads (name, email, book, language, resource_key, token) VALUES (?, ?, ?, ?, ?, ?)`
+      )
+        .bind(name, email, bookId, language, resource.key, token)
+        .run();
+    } catch (dbError) {
+      const message = String(dbError?.message || dbError);
+      if (!message.toLowerCase().includes("language") && !message.toLowerCase().includes("column")) {
+        throw dbError;
+      }
+
+      await env.DB.prepare(
+        `INSERT INTO leads (name, email, book, resource_key, token) VALUES (?, ?, ?, ?, ?)`
+      )
+        .bind(name, email, bookId, resource.key, token)
+        .run();
+    }
 
     const origin = new URL(request.url).origin;
     const downloadUrl = `${origin}/api/download?token=${token}`;
 
-    const emailResult = await sendResourceEmail(env, email, name, resource.title, downloadUrl);
+    const emailResult = await sendResourceEmail(env, email, name, resource.title, downloadUrl, language);
     if (emailResult.ok) {
       await env.DB.prepare(`UPDATE leads SET email_sent = 1 WHERE token = ?`)
         .bind(token)
@@ -172,8 +192,28 @@ async function handleResourceSubscribe(request, env) {
   }
 }
 
-async function sendResourceEmail(env, to, name, resourceTitle, downloadUrl) {
+async function sendResourceEmail(env, to, name, resourceTitle, downloadUrl, language = "en") {
   try {
+    const isSpanish = language === "es";
+    const safeName = escapeHtml(name);
+    const safeTitle = escapeHtml(resourceTitle);
+
+    const subject = isSpanish
+      ? `Tu recurso gratuito: ${resourceTitle}`
+      : `Your free resource: ${resourceTitle}`;
+
+    const greeting = isSpanish ? `Hola ${safeName},` : `Hi ${safeName},`;
+    const bodyCopy = isSpanish
+      ? `Gracias por tu interés en <strong>${safeTitle}</strong>. Tu recurso gratuito está listo — haz clic en el botón para descargarlo.`
+      : `Thank you for your interest in <strong>${safeTitle}</strong>! Your free companion resource is ready — just click below to download it.`;
+    const buttonLabel = isSpanish ? "Descargar mi recurso" : "Download My Resource";
+    const privacyNote = isSpanish
+      ? "Este enlace es personal — por favor, no lo compartas públicamente."
+      : "This link is personal — please don't share it publicly.";
+    const footer = isSpanish
+      ? "EK WonderKids · Preparando pequeñas mentes para grandes futuros."
+      : "EK WonderKids · Preparing little minds for big futures.";
+
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -183,7 +223,7 @@ async function sendResourceEmail(env, to, name, resourceTitle, downloadUrl) {
       body: JSON.stringify({
         from: env.FROM_EMAIL,
         to: [to],
-        subject: `Your free resource: ${resourceTitle}`,
+        subject,
         html: `
           <div style="font-family: 'Nunito', Arial, sans-serif; max-width:520px; margin:0 auto; background:#FDF6E9;">
             <div style="background:#1B4332; padding:28px 32px; text-align:center;">
@@ -192,23 +232,23 @@ async function sendResourceEmail(env, to, name, resourceTitle, downloadUrl) {
               </div>
             </div>
             <div style="padding:36px 32px; background:#ffffff;">
-              <p style="font-size:16px; color:#2B2116; margin:0 0 16px;">Hi ${escapeHtml(name)},</p>
+              <p style="font-size:16px; color:#2B2116; margin:0 0 16px;">${greeting}</p>
               <p style="font-size:15px; color:#4A3F2F; line-height:1.6; margin:0 0 24px;">
-                Thank you for your interest in <strong>${escapeHtml(resourceTitle)}</strong>! Your free companion resource is ready — just click below to download it.
+                ${bodyCopy}
               </p>
               <div style="text-align:center; margin:0 0 24px;">
                 <a href="${downloadUrl}"
                    style="background:#F4A825; color:#1B4332; padding:14px 32px; border-radius:8px; text-decoration:none; font-weight:700; font-size:15px; display:inline-block;">
-                  Download My Resource
+                  ${buttonLabel}
                 </a>
               </div>
               <p style="font-size:12.5px; color:#8A7D68; text-align:center; margin:0;">
-                This link is personal — please don't share it publicly.
+                ${privacyNote}
               </p>
             </div>
             <div style="padding:20px 32px; text-align:center; background:#FDF6E9;">
               <p style="font-size:12.5px; color:#8A7D68; margin:0;">
-                EK WonderKids · Preparing little minds for big futures.
+                ${footer}
               </p>
             </div>
           </div>
@@ -263,4 +303,3 @@ function escapeHtml(str) {
     (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
   );
 }
-

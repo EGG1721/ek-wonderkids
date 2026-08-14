@@ -61,13 +61,16 @@ function initFamilyKitForm() {
     const originalText = btn.textContent;
 
     btn.disabled = true;
-    btn.textContent = 'Sending...';
+    btn.textContent = (document.documentElement.lang || 'en').startsWith('es') ? 'Enviando...' : 'Sending...';
     note.textContent = '';
+
+    const language = form.language?.value || document.documentElement.lang || 'en';
 
     const payload = {
       name: form.name.value,
       email: form.email.value,
-      book: form.book.value // "family_kit"
+      book: form.book.value, // "family_kit"
+      language
     };
 
     try {
@@ -83,12 +86,17 @@ function initFamilyKitForm() {
         document.getElementById('kitFormWrap').style.display = 'none';
         document.getElementById('kitSuccess').style.display = 'block';
 
-        gtag('event', 'email_signup', { resource: 'book_en_04', source_page: 'book_en_04_hero' });
-        gtag('event', 'free_resource_download', { resource: 'book_en_04' });
-        gtag('event', 'email_signup', { resource: 'family_kit', source_page: 'index_newsletter' });
-        gtag('event', 'free_resource_download', { resource: 'family_kit' });
-        gtag('event', 'email_signup', { resource: 'book_en_04', source_page: 'seeds_of_wealth_landing' });
-        gtag('event', 'free_resource_download', { resource: 'book_en_04' });
+        if (typeof gtag === 'function') {
+          gtag('event', 'email_signup', {
+            resource: 'family_kit',
+            source_page: 'index_newsletter',
+            language
+          });
+          gtag('event', 'free_resource_download', {
+            resource: 'family_kit',
+            language
+          });
+        }
 
         // Dispara la descarga sin sacar al usuario de la página
         const dl = document.createElement('iframe');
@@ -96,14 +104,14 @@ function initFamilyKitForm() {
         dl.src = data.downloadUrl;
         document.body.appendChild(dl);
       } else {
-        note.textContent = data.error || 'Something went wrong, please try again.';
+        note.textContent = data.error || ((document.documentElement.lang || 'en').startsWith('es') ? 'Algo salió mal, intenta de nuevo.' : 'Something went wrong, please try again.');
         note.style.color = '#fff';
         note.style.fontWeight = '700';
         btn.disabled = false;
         btn.textContent = originalText;
       }
     } catch (err) {
-      note.textContent = 'Connection error, please try again.';
+      note.textContent = (document.documentElement.lang || 'en').startsWith('es') ? 'Error de conexión, intenta de nuevo.' : 'Connection error, please try again.';
       note.style.color = '#fff';
       note.style.fontWeight = '700';
       btn.disabled = false;
