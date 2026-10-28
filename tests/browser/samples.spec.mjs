@@ -49,13 +49,20 @@ for (const es of [false, true]) {
           .map((item) => item[1]),
       );
       expect(events).toContain("sample_open");
-      expect(events).toContain("sample_read");
+      // Native details toggle events are queued after the visible state changes.
+      await expect
+        .poll(() =>
+          page.evaluate(() =>
+            window.dataLayer
+              .filter((item) => item[0] === "event")
+              .map((item) => item[1]),
+          ),
+        )
+        .toContain("sample_read");
       fs.mkdirSync("artifacts", { recursive: true });
-      await page
-        .locator("#inside")
-        .screenshot({
-          path: `artifacts/samples-${es ? "es" : "en"}-${width}.png`,
-        });
+      await page.locator("#inside").screenshot({
+        path: `artifacts/samples-${es ? "es" : "en"}-${width}.png`,
+      });
     });
   }
 }
