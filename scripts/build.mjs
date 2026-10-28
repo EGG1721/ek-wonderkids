@@ -1,5 +1,8 @@
 import { mkdir, readdir, copyFile, cp } from "node:fs/promises";
 import path from "node:path";
+import { assertBuildAllowed } from "./deployment-policy.mjs";
+
+assertBuildAllowed();
 
 // Allowlist: internal files, local databases and credentials never become assets.
 const output = path.resolve("dist");
