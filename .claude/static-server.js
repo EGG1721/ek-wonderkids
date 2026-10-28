@@ -1,6 +1,6 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
+import http from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const port = Number(process.argv[2]) || 5173;
 const root = process.argv[3] ? path.resolve(process.argv[3]) : process.cwd();

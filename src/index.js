@@ -1,305 +1,268 @@
-// src/index.js
-//
-// Este Worker maneja TRES sistemas independientes:
-//
-// 1. POST /subscribe      -> Newsletter general "Coming Soon" -> D1 + Resend
-// 2. POST /api/subscribe  -> Lead magnet de recurso por libro -> D1 + Resend
-// 3. GET  /api/download   -> Entrega del PDF vía token de un solo uso -> D1 + R2
-//
-// Todo lo demás (HTML, CSS, JS, imágenes) lo sirve el binding de assets.
+import { sendResourceEmail, sendNewsletterConfirmation } from "./email.js";
 
-// Mapa de recursos: agrega una entrada por cada libro que tenga su propio lead magnet.
-// El "key" debe coincidir EXACTO con el nombre del archivo que subas a R2.
-const RESOURCES = {
-  book01: { key: "the-waiting-jar-guia.pdf", title: "The Waiting Jar — Parent Guide" },
-  book02: { key: "the-grand-spring-festival-guia.pdf", title: "The Grand Spring Festival — Parent Guide" },
-  book03: { key: "when-compass-pointed-north-guia.pdf", title: "When the Compass Pointed North — Parent Guide" },
-  book_en_04: { key: "ready-for-the-rain-guia.pdf", title: "Ready for the Rain — Parent Guide" },
-  // Temporalmente reutiliza el mismo archivo R2 del recurso EN para no romper la entrega.
-  // Cuando exista el PDF español, cambia SOLO `key` por el nombre del objeto español en R2.
-  book_es_04: { key: "listo-para-la-lluvia-listo-para-las-estrellas-guia.pdf", title: "Listo para la Lluvia, Listo para las Estrellas — Recurso para Padres" },
-  family_kit: { key: "wonderkids-family-kit.pdf", title: "The WonderKids Family Kit" },
-};
+export const RESOURCES = Object.freeze({
+  book01: {
+    key: "the-waiting-jar-guia.pdf",
+    title: "The Waiting Jar — Parent Guide",
+    language: "en",
+  },
+  book02: {
+    key: "the-grand-spring-festival-guia.pdf",
+    title: "The Grand Spring Festival — Parent Guide",
+    language: "en",
+  },
+  book03: {
+    key: "when-compass-pointed-north-guia.pdf",
+    title: "When the Compass Pointed North — Parent Guide",
+    language: "en",
+  },
+  book_en_04: {
+    key: "ready-for-the-rain-guia.pdf",
+    title: "Ready for Rain, Ready for Stars — Parent Guide",
+    language: "en",
+  },
+  book_es_04: {
+    key: "listo-para-la-lluvia-listo-para-las-estrellas-guia.pdf",
+    title:
+      "Listo para la Lluvia, Listo para las Estrellas — Recurso para Padres",
+    language: "es",
+  },
+  // Only an English kit is configured. The Spanish UI explicitly labels it as English.
+  family_kit: {
+    key: "wonderkids-family-kit.pdf",
+    title: "The WonderKids Family Kit",
+    language: "en",
+  },
+});
+
+const WEEK = 7 * 24 * 60 * 60 * 1000;
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const TOKEN =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+const json = (body, status = 200, headers = {}) =>
+  Response.json(body, {
+    status,
+    headers: {
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      ...headers,
+    },
+  });
 
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url);
-
-    // ── Newsletter general ──
-    if (url.pathname === "/subscribe" && request.method === "POST") {
-      return handleNewsletterSubscribe(request, env);
+    const { pathname } = new URL(request.url);
+    const isSubscribe =
+      pathname === "/api/subscribe" || pathname === "/subscribe";
+    const isDownload = pathname === "/api/download";
+    if (!isSubscribe && !isDownload) return env.ASSETS.fetch(request);
+    const method = isDownload ? "GET" : "POST";
+    if (request.method !== method)
+      return json({ error: "method_not_allowed" }, 405, { Allow: method });
+    try {
+      if (isDownload) return await download(request, env);
+      return await subscribe(request, env, pathname === "/subscribe");
+    } catch {
+      // Never log submitted names, addresses, tokens or provider responses.
+      console.error(
+        JSON.stringify({ event: "request_failed", route: pathname }),
+      );
+      return json({ error: "service_unavailable" }, 503);
     }
-
-    // ── Lead magnet por libro ──
-    if (url.pathname === "/api/subscribe" && request.method === "POST") {
-      return handleResourceSubscribe(request, env);
-    }
-
-    // ── Entrega del recurso vía token ──
-    if (url.pathname === "/api/download" && request.method === "GET") {
-      return handleDownload(request, env);
-    }
-
-    // Todo lo demás lo sirve el binding de assets
-    return env.ASSETS.fetch(request);
   },
 };
 
-// ═══════════════════════════════════════════════════════════
-// Newsletter general -> D1 + Resend
-// ═══════════════════════════════════════════════════════════
-async function handleNewsletterSubscribe(request, env) {
-  try {
-    const { email } = await request.json();
-    const cleanEmail = (email || "").trim().toLowerCase();
-
-    if (!cleanEmail || !cleanEmail.includes("@")) {
-      return Response.json(
-        { message: "Please enter a valid email." },
-        { status: 400 }
-      );
-    }
-
-    // INSERT OR IGNORE evita error si el correo ya existe (no se duplica)
-    const result = await env.DB.prepare(
-      `INSERT OR IGNORE INTO newsletter_subscribers (email) VALUES (?)`
-    )
-      .bind(cleanEmail)
-      .run();
-
-    const isNewSubscriber = result.meta.changes > 0;
-
-    // Solo mandamos el correo de confirmación si es alguien nuevo,
-    // para no reenviarlo cada vez que alguien reintenta con el mismo email.
-    if (isNewSubscriber) {
-      await sendNewsletterConfirmation(env, cleanEmail);
-    }
-
-    return Response.json({ message: "Subscribed successfully." }, { status: 200 });
-  } catch (error) {
-    return Response.json(
-      { message: "We could not save your email right now." },
-      { status: 500 }
-    );
+async function readBody(request) {
+  if (
+    !request.headers
+      .get("content-type")
+      ?.toLowerCase()
+      .startsWith("application/json")
+  ) {
+    return { response: json({ error: "json_required" }, 415) };
   }
-}
-
-async function sendNewsletterConfirmation(env, to) {
+  if (Number(request.headers.get("content-length")) > 4096)
+    return { response: json({ error: "body_too_large" }, 413) };
+  const reader = request.body?.getReader();
+  if (!reader) return { response: json({ error: "invalid_request" }, 400) };
+  let size = 0;
+  const chunks = [];
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > 4096) {
+      await reader.cancel();
+      return { response: json({ error: "body_too_large" }, 413) };
+    }
+    chunks.push(value);
+  }
   try {
-    await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${env.RESEND_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: env.FROM_EMAIL_NEWSLETTER,
-        to: [to],
-        subject: "Welcome to EK WonderKids! 🚀",
-        html: `
-          <div style="font-family: 'Nunito', Arial, sans-serif; max-width:520px; margin:0 auto; background:#FFFBE6;">
-            <div style="background:#06134a; padding:28px 32px; text-align:center;">
-              <div style="font-family: Arial, sans-serif; font-weight:800; font-size:20px; color:#fff; letter-spacing:0.02em;">
-                EK <span style="color:#F5C15E;">WonderKids</span>
-              </div>
-            </div>
-            <div style="padding:36px 32px; background:#ffffff;">
-              <p style="font-size:16px; color:#1a1a1a; margin:0 0 16px;">Hi there,</p>
-              <p style="font-size:15px; color:#4a4a4a; line-height:1.6; margin:0 0 16px;">
-                Thank you for your interest in <strong>EK WonderKids</strong> — you're officially on the list! 🎉
-              </p>
-              <p style="font-size:15px; color:#4a4a4a; line-height:1.6; margin:0 0 24px;">
-                You'll be the first to know about new book launches, free companion resources, and early access. No spam, ever — just wonder.
-              </p>
-              <div style="text-align:center; margin:0 0 8px;">
-                <a href="https://www.amazon.com/stores/EK-WonderKids/author/B0GJ16T794"
-                   style="background:#e5231a; color:#ffffff; padding:14px 32px; border-radius:8px; text-decoration:none; font-weight:700; font-size:15px; display:inline-block;">
-                  Explore Our Books
-                </a>
-              </div>
-            </div>
-            <div style="padding:20px 32px; text-align:center; background:#06134a;">
-              <p style="font-size:12.5px; color:rgba(255,255,255,0.6); margin:0;">
-                EK WonderKids · Preparing little minds for big futures.
-              </p>
-            </div>
-          </div>
-        `,
-      }),
-    });
+    const bytes = new Uint8Array(size);
+    let offset = 0;
+    for (const chunk of chunks) {
+      bytes.set(chunk, offset);
+      offset += chunk.byteLength;
+    }
+    const data = JSON.parse(new TextDecoder().decode(bytes));
+    if (!data || typeof data !== "object" || Array.isArray(data))
+      throw new Error();
+    return { data };
   } catch {
-    // Si falla el correo, no rompemos la suscripción — el registro en D1 ya quedó guardado.
+    return { response: json({ error: "invalid_request" }, 400) };
   }
 }
 
-// ═══════════════════════════════════════════════════════════
-// Lead magnet por libro -> D1 + Resend
-// ═══════════════════════════════════════════════════════════
-async function handleResourceSubscribe(request, env) {
+async function subscribe(request, env, newsletter) {
+  const origin = request.headers.get("origin");
+  if (origin && origin !== new URL(request.url).origin)
+    return json({ error: "origin_not_allowed" }, 403);
+  const ip = request.headers.get("CF-Connecting-IP") || "local";
+  if (!env.SUBSCRIBE_LIMITER)
+    return json({ error: "service_unavailable" }, 503);
+  const { success } = await env.SUBSCRIBE_LIMITER.limit({
+    key: "subscribe:" + ip,
+  });
+  if (!success)
+    return json({ error: "too_many_requests" }, 429, { "Retry-After": "60" });
+  const parsed = await readBody(request);
+  if (parsed.response) return parsed.response;
+  const data = parsed.data;
+  if (data.website) return json({ error: "invalid_request" }, 400);
+  const email =
+    typeof data.email === "string" ? data.email.trim().toLowerCase() : "";
+  if (!EMAIL.test(email) || email.length > 254)
+    return json({ error: "invalid_email" }, 400);
+  if (newsletter) {
+    const saved = await env.DB.prepare(
+      "INSERT OR IGNORE INTO newsletter_subscribers (email) VALUES (?)",
+    )
+      .bind(email)
+      .run();
+    const result =
+      saved.meta.changes > 0
+        ? await sendNewsletterConfirmation(env, email)
+        : null;
+    return json({
+      success: true,
+      emailStatus: result
+        ? result.ok
+          ? "accepted"
+          : "failed"
+        : "not_requested",
+      message: "Subscribed successfully.",
+    });
+  }
+  const name = typeof data.name === "string" ? data.name.trim() : "";
+  if (!name || name.length > 100 || /[\u0000-\u001f\u007f]/.test(name))
+    return json({ error: "invalid_name" }, 400);
+  if (typeof data.book !== "string" || !Object.hasOwn(RESOURCES, data.book))
+    return json({ error: "invalid_resource" }, 400);
+  if (data.language !== undefined && !["en", "es"].includes(data.language))
+    return json({ error: "invalid_language" }, 400);
+  const resource = RESOURCES[data.book];
+  const language = data.language || resource.language;
+  if (!(await env.RESOURCES.head(resource.key)))
+    return json({ error: "resource_unavailable" }, 503);
+  const recent = await env.DB.prepare(
+    "SELECT id FROM leads WHERE email = ? AND book = ? AND created_at > datetime('now', '-1 minute') LIMIT 1",
+  )
+    .bind(email, data.book)
+    .first();
+  if (recent)
+    return json({ error: "too_many_requests" }, 429, { "Retry-After": "60" });
+  const token = crypto.randomUUID();
   try {
-    const data = await request.json();
-    const name = (data.name || "").trim();
-    const email = (data.email || "").trim().toLowerCase();
-    const bookId = data.book;
-    const language = data.language === "es" ? "es" : "en";
-
-    if (!name || !email || !RESOURCES[bookId]) {
-      return Response.json({ error: "Datos incompletos" }, { status: 400 });
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return Response.json({ error: "Correo inválido" }, { status: 400 });
-    }
-
-    const resource = RESOURCES[bookId];
-    const token = crypto.randomUUID();
-
-    // Intentamos guardar el idioma si la migración ya fue aplicada.
-    // Si todavía no existe la columna `language`, hacemos fallback al INSERT anterior
-    // para no interrumpir capturas durante el despliegue.
+    await env.DB.prepare(
+      "INSERT INTO leads (name, email, book, language, resource_key, token) VALUES (?, ?, ?, ?, ?, ?)",
+    )
+      .bind(name, email, data.book, language, resource.key, token)
+      .run();
+  } catch (error) {
+    if (
+      !/no column named language|has no column named language/i.test(
+        String(error.message),
+      )
+    )
+      throw error;
+    await env.DB.prepare(
+      "INSERT INTO leads (name, email, book, resource_key, token) VALUES (?, ?, ?, ?, ?)",
+    )
+      .bind(name, email, data.book, resource.key, token)
+      .run();
+  }
+  const downloadUrl =
+    new URL(request.url).origin + "/api/download?token=" + token;
+  const result = await sendResourceEmail(
+    env,
+    email,
+    name,
+    resource.title,
+    downloadUrl,
+    language,
+  );
+  if (result.ok) {
     try {
-      await env.DB.prepare(
-        `INSERT INTO leads (name, email, book, language, resource_key, token) VALUES (?, ?, ?, ?, ?, ?)`
-      )
-        .bind(name, email, bookId, language, resource.key, token)
-        .run();
-    } catch (dbError) {
-      const message = String(dbError?.message || dbError);
-      if (!message.toLowerCase().includes("language") && !message.toLowerCase().includes("column")) {
-        throw dbError;
-      }
-
-      await env.DB.prepare(
-        `INSERT INTO leads (name, email, book, resource_key, token) VALUES (?, ?, ?, ?, ?)`
-      )
-        .bind(name, email, bookId, resource.key, token)
-        .run();
-    }
-
-    const origin = new URL(request.url).origin;
-    const downloadUrl = `${origin}/api/download?token=${token}`;
-
-    const emailResult = await sendResourceEmail(env, email, name, resource.title, downloadUrl, language);
-    if (emailResult.ok) {
-      await env.DB.prepare(`UPDATE leads SET email_sent = 1 WHERE token = ?`)
+      await env.DB.prepare("UPDATE leads SET email_sent = 1 WHERE token = ?")
         .bind(token)
         .run();
+    } catch {
+      console.error(JSON.stringify({ event: "email_status_write_failed" }));
     }
-
-    // Aunque el correo falle, dejamos que el usuario descargue de inmediato.
-    return Response.json({ success: true, downloadUrl });
-  } catch (error) {
-    return Response.json({ error: "Error interno, intenta de nuevo" }, { status: 500 });
-  }
-}
-
-async function sendResourceEmail(env, to, name, resourceTitle, downloadUrl, language = "en") {
-  try {
-    const isSpanish = language === "es";
-    const safeName = escapeHtml(name);
-    const safeTitle = escapeHtml(resourceTitle);
-
-    const subject = isSpanish
-      ? `Tu recurso gratuito: ${resourceTitle}`
-      : `Your free resource: ${resourceTitle}`;
-
-    const greeting = isSpanish ? `Hola ${safeName},` : `Hi ${safeName},`;
-    const bodyCopy = isSpanish
-      ? `Gracias por tu interés en <strong>${safeTitle}</strong>. Tu recurso gratuito está listo — haz clic en el botón para descargarlo.`
-      : `Thank you for your interest in <strong>${safeTitle}</strong>! Your free companion resource is ready — just click below to download it.`;
-    const buttonLabel = isSpanish ? "Descargar mi recurso" : "Download My Resource";
-    const privacyNote = isSpanish
-      ? "Este enlace es personal — por favor, no lo compartas públicamente."
-      : "This link is personal — please don't share it publicly.";
-    const footer = isSpanish
-      ? "EK WonderKids · Preparando pequeñas mentes para grandes futuros."
-      : "EK WonderKids · Preparing little minds for big futures.";
-
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${env.RESEND_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: env.FROM_EMAIL,
-        to: [to],
-        subject,
-        html: `
-          <div style="font-family: 'Nunito', Arial, sans-serif; max-width:520px; margin:0 auto; background:#FDF6E9;">
-            <div style="background:#1B4332; padding:28px 32px; text-align:center;">
-              <div style="font-family: Arial, sans-serif; font-weight:800; font-size:20px; color:#fff; letter-spacing:0.02em;">
-                EK <span style="color:#F4A825;">WonderKids</span>
-              </div>
-            </div>
-            <div style="padding:36px 32px; background:#ffffff;">
-              <p style="font-size:16px; color:#2B2116; margin:0 0 16px;">${greeting}</p>
-              <p style="font-size:15px; color:#4A3F2F; line-height:1.6; margin:0 0 24px;">
-                ${bodyCopy}
-              </p>
-              <div style="text-align:center; margin:0 0 24px;">
-                <a href="${downloadUrl}"
-                   style="background:#F4A825; color:#1B4332; padding:14px 32px; border-radius:8px; text-decoration:none; font-weight:700; font-size:15px; display:inline-block;">
-                  ${buttonLabel}
-                </a>
-              </div>
-              <p style="font-size:12.5px; color:#8A7D68; text-align:center; margin:0;">
-                ${privacyNote}
-              </p>
-            </div>
-            <div style="padding:20px 32px; text-align:center; background:#FDF6E9;">
-              <p style="font-size:12.5px; color:#8A7D68; margin:0;">
-                ${footer}
-              </p>
-            </div>
-          </div>
-        `,
+  } else {
+    console.warn(
+      JSON.stringify({
+        event: "resource_email_not_accepted",
+        resource: data.book,
       }),
-    });
-    return { ok: res.ok };
-  } catch {
-    return { ok: false };
+    );
   }
+  return json({
+    success: true,
+    downloadUrl,
+    emailStatus: result.ok ? "accepted" : "failed",
+    resourceLanguage: resource.language,
+  });
 }
 
-// ═══════════════════════════════════════════════════════════
-// Entrega del recurso vía token -> R2
-// ═══════════════════════════════════════════════════════════
-async function handleDownload(request, env) {
-  const url = new URL(request.url);
-  const token = url.searchParams.get("token");
-
-  if (!token) {
-    return new Response("Falta el token de descarga", { status: 400 });
-  }
-
-  const lead = await env.DB.prepare(`SELECT resource_key FROM leads WHERE token = ?`)
+async function download(request, env) {
+  const token = new URL(request.url).searchParams.get("token");
+  if (!token || !TOKEN.test(token))
+    return json({ error: "invalid_download" }, 400);
+  const lead = await env.DB.prepare(
+    "SELECT resource_key, created_at FROM leads WHERE token = ?",
+  )
     .bind(token)
     .first();
-
-  if (!lead) {
-    return new Response("Enlace inválido o expirado", { status: 404 });
+  const created = lead && Date.parse(lead.created_at.replace(" ", "T") + "Z");
+  if (
+    !lead ||
+    !Number.isFinite(created) ||
+    Date.now() - created > WEEK ||
+    created > Date.now() + 60000
+  ) {
+    return json({ error: "download_expired" }, 410);
   }
-
   const object = await env.RESOURCES.get(lead.resource_key);
-  if (!object) {
-    return new Response("Recurso no encontrado", { status: 404 });
+  if (!object) return json({ error: "resource_unavailable" }, 503);
+  try {
+    await env.DB.prepare(
+      "UPDATE leads SET downloaded_at = COALESCE(downloaded_at, datetime('now')) WHERE token = ?",
+    )
+      .bind(token)
+      .run();
+  } catch {
+    console.error(JSON.stringify({ event: "download_status_write_failed" }));
   }
-
-  await env.DB.prepare(`UPDATE leads SET downloaded_at = datetime('now') WHERE token = ?`)
-    .bind(token)
-    .run();
-
   const headers = new Headers();
   object.writeHttpMetadata(headers);
-  headers.set("Content-Disposition", `attachment; filename="${lead.resource_key}"`);
-  headers.set("Cache-Control", "private, no-store");
-
-  return new Response(object.body, { headers });
-}
-
-function escapeHtml(str) {
-  return str.replace(
-    /[&<>"']/g,
-    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
+  headers.set("Content-Type", "application/pdf");
+  headers.set(
+    "Content-Disposition",
+    'attachment; filename="' + lead.resource_key + '"',
   );
+  headers.set("Cache-Control", "private, no-store");
+  headers.set("X-Content-Type-Options", "nosniff");
+  headers.set("Referrer-Policy", "no-referrer");
+  return new Response(object.body, { headers });
 }

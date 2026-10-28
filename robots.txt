@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /subscribe
+Sitemap: https://ekwonderkids.com/sitemap.xml

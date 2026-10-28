@@ -3,22 +3,44 @@
   "compatibility_date": "2026-07-01",
   "main": "src/index.js",
   "assets": {
-    "directory": "./",
+    "directory": "./dist",
     "binding": "ASSETS",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*", "/subscribe"],
   },
-//Nuevas funicionalidades de Wrangler agregadas en la version 3.0.0
   "d1_databases": [
-  {
-    "binding": "DB",
-    "database_name": "leads-db",
-    "database_id": "22f75d4e-e025-48c3-af1f-ad3a73494529"
-  }
-],
-"r2_buckets": [
-  {
-    "binding": "RESOURCES",
-    "bucket_name": "ek-wonderkids-resources"
-  }
-]
+    {
+      "binding": "DB",
+      "database_name": "leads-db",
+      "database_id": "22f75d4e-e025-48c3-af1f-ad3a73494529",
+    },
+  ],
+  "r2_buckets": [
+    {
+      "binding": "RESOURCES",
+      "bucket_name": "ek-wonderkids-resources",
+    },
+  ],
+  "build": {
+    "command": "npm run build",
+  },
+  "ratelimits": [
+    {
+      "name": "SUBSCRIBE_LIMITER",
+      "namespace_id": "1001",
+      "simple": {
+        "limit": 10,
+        "period": 60,
+      },
+    },
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 0.1,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 0.1,
+      "invocation_logs": false,
+    },
+  },
 }

@@ -1,7 +1,12 @@
 src/
-schema.sql
-README.md
-wrangler.jsonc
+scripts/
+tests/
+.wrangler/
 .claude/
-node_modules/
 .git/
+.github/
+node_modules/
+*.sql
+*.jsonc
+*.md
+package*.json

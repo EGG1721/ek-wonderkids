@@ -1,570 +1,413 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Libros infantiles de 4 a 8 años | Valores, Dinero y Habilidades para la Vida | EK WonderKids</title>
-<meta name="description" content="EK WonderKids crea cuentos infantiles, actividades familiares y recursos educativos para ayudar a niños de 4 a 8 años a aprender valores, dinero, valentía y habilidades para la vida." />
-<meta name="keywords" content="libros infantiles, cuentos infantiles con valores, libros para niños de 4 a 8 años, educación financiera para niños, cuentos sobre honestidad, cuentos sobre paciencia, cuentos sobre valentía, actividades para padres e hijos, EK WonderKids" />
-<meta name="author" content="EK WonderKids" />
-<meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://www.ekwonderkids.com/es/" />
-<link rel="alternate" hreflang="en" href="https://www.ekwonderkids.com/" />
-<link rel="alternate" hreflang="es" href="https://www.ekwonderkids.com/es/" />
-<link rel="alternate" hreflang="x-default" href="https://www.ekwonderkids.com/" />
-
-<!-- Open Graph -->
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="EK WonderKids" />
-<meta property="og:title" content="EK WonderKids | Cuentos infantiles con valores y habilidades para la vida" />
-<meta property="og:description" content="Cuentos, actividades y recursos familiares para ayudar a niños de 4 a 8 años a aprender valores, dinero, valentía y habilidades para la vida." />
-<meta property="og:image" content="https://www.ekwonderkids.com/images/logo-completo.png" />
-<meta property="og:url" content="https://www.ekwonderkids.com/es/" />
-<meta property="og:locale" content="es_SV" />
-<meta property="og:locale:alternate" content="en_US" />
-
-<!--Pinterest etiqueta-->
-<meta name="p:domain_verify" content="a6134cd61a167fccdb36544444806de0"/>
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="EK WonderKids | Cuentos infantiles con propósito" />
-<meta name="twitter:description" content="Historias, actividades y recursos para familias con niños de 4 a 8 años." />
-<meta name="twitter:image" content="https://www.ekwonderkids.com/images/logo-completo.png" />
-
-<!-- JSON-LD structured data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://www.ekwonderkids.com/#organization",
-      "name": "EK WonderKids",
-      "url": "https://www.ekwonderkids.com",
-      "logo": "https://www.ekwonderkids.com/images/logo.png",
-      "description": "EK WonderKids creates children's books that prepare little minds for big futures through creative learning and storytelling.",
-      "sameAs": ["https://www.amazon.com/stores/EK-WonderKids/author/B0GJ16T794"]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.ekwonderkids.com/#website",
-      "name": "EK WonderKids",
-      "url": "https://www.ekwonderkids.com",
-      "publisher": {"@id": "https://www.ekwonderkids.com/#organization"},
-      "inLanguage": "es"
-    },
-    {
-      "@type": "Book",
-      "name": "Little Heroes at Work",
-      "author": {"@id": "https://www.ekwonderkids.com/#organization"},
-      "bookFormat": "https://schema.org/Paperback",
-      "genre": "Children's Coloring Book",
-      "audience": {"@type": "EducationalAudience", "educationalRole": "student", "suggestedMinAge": 4, "suggestedMaxAge": 6},
-      "url": "https://www.amazon.com/Little-Heroes-Work-Coloring-Professions/dp/B0GHZRLFMV",
-      "isbn": "B0GHZRLFMV",
-      "description": "A Fun Coloring Book of Professions for Kids Edades 4–6 — doctors, firefighters and more!",
-      "publisher": {"@id": "https://www.ekwonderkids.com/#organization"}
-    },
-    {
-      "@type": "Book",
-      "name": "Little Heroes at Work Volume 2: Modern & Future Careers",
-      "author": {"@id": "https://www.ekwonderkids.com/#organization"},
-      "bookFormat": "https://schema.org/Paperback",
-      "genre": "Children's Coloring Book",
-      "audience": {"@type": "EducationalAudience", "educationalRole": "student", "suggestedMinAge": 4, "suggestedMaxAge": 6},
-      "url": "https://www.amazon.com/dp/B0GLF1N7SL",
-      "isbn": "B0GLF1N7SL",
-      "description": "A Fun Coloring Book of Modern & Future Careers for Kids Edades 4–6 — engineers and astronauts.",
-      "publisher": {"@id": "https://www.ekwonderkids.com/#organization"}
-    },
-    {
-      "@type": "Book",
-      "name": "Little Heroes at Work Volume 3: Future Careers & Creative Skills",
-      "author": {"@id": "https://www.ekwonderkids.com/#organization"},
-      "bookFormat": "https://schema.org/Paperback",
-      "genre": "Children's Coloring Book",
-      "audience": {"@type": "EducationalAudience", "educationalRole": "student", "suggestedMinAge": 4, "suggestedMaxAge": 6},
-      "url": "https://www.amazon.com/dp/B0GNDSP77R",
-      "isbn": "B0GNDSP77R",
-      "description": "A Fun Coloring Book of Future Careers and Creative Skills for Kids Edades 4–6 — scientists, robotics and innovators.",
-      "publisher": {"@id": "https://www.ekwonderkids.com/#organization"}
-    },
-    {
-      "@type": "Book",
-      "name": "The Waiting Jar: A Story About Patience and Big Decisions",
-      "author": {"@id": "https://www.ekwonderkids.com/#organization"},
-      "bookFormat": "https://schema.org/EBook",
-      "genre": "Children's Picture Book",
-      "audience": {"@type": "EducationalAudience", "educationalRole": "student", "suggestedMinAge": 4, "suggestedMaxAge": 8},
-      "url": "https://www.amazon.com/dp/B0GP2RW63T",
-      "isbn": "B0GP2RW63T",
-      "description": "A heartwarming story about patience, saving, and making the decisions that matter most.",
-      "publisher": {"@id": "https://www.ekwonderkids.com/#organization"}
-    },
-    {
-      "@type": "Book",
-      "name": "The Grand Spring Festival: Courage Takes the First Step",
-      "author": {"@id": "https://www.ekwonderkids.com/#organization"},
-      "bookFormat": "https://schema.org/EBook",
-      "genre": "Children's Picture Book",
-      "audience": {"@type": "EducationalAudience", "educationalRole": "student", "suggestedMinAge": 4, "suggestedMaxAge": 8},
-      "url": "https://www.amazon.com/dp/B0GSCR1XJW",
-      "isbn": "B0GSCR1XJW",
-      "description": "A stunning tale of bravery and belonging — courage takes the first step.",
-      "publisher": {"@id": "https://www.ekwonderkids.com/#organization"}
-    },
-    {
-      "@type": "Book",
-      "name": "When the Compass Points North",
-      "author": {"@id": "https://www.ekwonderkids.com/#organization"},
-      "bookFormat": "https://schema.org/EBook",
-      "genre": "Children's Picture Book",
-      "audience": {"@type": "EducationalAudience", "educationalRole": "student", "suggestedMinAge": 4, "suggestedMaxAge": 8},
-      "url": "https://www.amazon.com/dp/B0H8QLJLMX",
-      "isbn": "B0H8QLJLMX",
-      "description": "When Bruno discovers an old compass deep in the Great Oak Forest, he must make a choice that will test his heart. Set in the charming village of Brillavale, this heartwarming adventure teaches children that honesty, integrity, and doing the right thing are the greatest treasures of all.",
-      "publisher": {"@id": "https://www.ekwonderkids.com/#organization"}
-    }
-    ,
-    {
-    "@type": "Book",
-    "name": "Ready For Rain, Ready for Stars",
-    "author": {"@id": "https://www.ekwonderkids.com/#organization"},
-    "bookFormat": "https://schema.org/EBook",
-    "genre": "Children's Picture Book",
-    "audience": {"@type": "EducationalAudience", "educationalRole": "student", "suggestedMinAge": 4, "suggestedMaxAge": 8},
-    "url": "https://www.amazon.com/-/es/EK-WonderKids-ebook/dp/B0HC4V7Q6V/",
-    "isbn": "B0HC4V7Q6V",
-    "description": "Real financial words, taught through a story they'll beg to reread. Book 1 of the Seeds of Wealth series.",
-    "publisher": {"@id": "https://www.ekwonderkids.com/#organization"}
-}
-]
-}
-</script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/style.css" />
-<link rel="stylesheet" href="/css/language-switcher.css" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZ09833VVP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SZ09833VVP');
-</script>
-<!-- Spanish launch notice styling -->
-<style>
-  .wealth-es-soon{ display:flex; gap:14px; align-items:flex-start; margin-top:22px; padding:16px 18px; border-radius:12px; background:#FBF3E3; border:1px solid #EADBBB; }
-  .wealth-es-soon .flag{ font-size:24px; line-height:1; }
-  .wealth-es-soon strong{ display:block; font-size:14.5px; color:#24382A; margin-bottom:3px; }
-  .wealth-es-soon p{ margin:0 0 8px; font-size:13.5px; line-height:1.5; color:#5A503E; }
-  .wealth-es-soon a{ font-weight:800; font-size:13.5px; color:#C97B2E; text-decoration:underline; }
-</style>
-</head>
-
-<body>
-<div class="launch-banner">
-  🌱 PRÓXIMAMENTE EN ESPAÑOL — <em>Listo para la Lluvia, Listo para las Estrellas</em>. <a href="/book_es_04.html">Obtén el recurso gratuito + adelanto →</a>
-</div>
-<!-- ══ STICKY NAV ══ -->
-<header class="navbar">
-  <a href="#hero" class="nav-logo">
-    <img src="/images/logo.png" alt="EK WonderKids" />
-  </a>
-  <nav class="nav-links" id="navLinks">
-    <a href="#wealth" class="nav-link">Seeds of Wealth</a>
-    <a href="#stories" class="nav-link">Cuentos</a>
-    <a href="#books" class="nav-link">Libros para Colorear</a>
-    <a href="#about" class="nav-link">Nosotros</a>
-    <a href="#newsletter" class="nav-link">Próximamente</a>
-    <div class="language-switcher" aria-label="Selector de idioma">
-      <button class="language-current" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="languageMenu" id="languageButton">
-        <span class="language-code">ES</span><span class="language-arrow" aria-hidden="true">▾</span>
-      </button>
-      <div class="language-menu" id="languageMenu" role="menu">
-        <a href="/" class="language-option" lang="en" hreflang="en" role="menuitem"><span>English</span><span class="language-short">EN</span></a>
-        <a href="/es/" class="language-option is-active" lang="es" hreflang="es" role="menuitem"><span>Español</span><span class="language-short">ES</span></a>
-      </div>
-    </div>
-<a href="https://www.amazon.com/stores/EK-WonderKids/author/B0GJ16T794" target="_blank" rel="noopener" class="btn btn-gold nav-cta">★ Comprar en Amazon</a>
-   </nav>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</header>
-
-<!-- ══ HERO ══ -->
-
-<section id="hero" class="hero">
-  <div class="hero-bg-dots"></div>
-  <div class="hero-bg-glow"></div>
-  <span class="twinkle twinkle--1">⭐</span>
-  <span class="twinkle twinkle--2">⭐</span>
-  <span class="twinkle twinkle--3">✨</span>
-
-  <div class="hero-content">
-    <div class="badge badge-gold hero-badge">⭐ AHORA EN AMAZON KDP ⭐</div>
-    <h1 class="hero-title">Historias que ayudan a<br />las pequeñas mentes a <span class="text-gold">crecer</span></h1>
-    <p class="hero-text">Libros bellamente ilustrados y actividades familiares que fortalecen el carácter, la valentía y habilidades para la vida — una historia a la vez, para niños de 4 a 8 años.</p>
-    <div class="hero-actions">
-  <a href="https://www.amazon.com/stores/EK-WonderKids/author/B0GJ16T794" class="btn btn-red">Explorar los libros →</a>
-  <a href="#newsletter" class="btn btn-outline">Obtén una actividad familiar gratis</a>
-</div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-value">7</div>
-        <div class="stat-label">Libros publicados</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">4–8</div>
-        <div class="stat-label">Edades</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">100%</div>
-        <div class="stat-label">Pensado para niños</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-character">
-    <img src="/images/logo-completo.png" alt="EK WonderKids characters" />
-  </div>
-
-  <svg class="hero-wave" viewBox="0 0 1200 80" preserveAspectRatio="none">
-    <path d="M0,80 L0,44 Q200,8 400,44 Q600,80 800,44 Q1000,8 1200,44 L1200,80 Z" fill="#fff" />
-  </svg>
-</section>
-<section id="problem" class="section section--problem">
-  <div class="problem-wrap">
-    <div class="eyebrow eyebrow-gold-dark">ACOMPAÑANDO LOS MOMENTOS QUE IMPORTAN</div>
-    <h2 class="problem-title">
-      Sabes lo que quieres enseñarles.<br>
-      <span class="problem-title-soft">Encontrar la forma adecuada no siempre es fácil.</span>
-    </h2>
-    <p class="problem-body">
-      Quieres que tu hijo crezca seguro de sí mismo, amable, reflexivo y preparado para la vida.
-      Pero las grandes lecciones — dinero, honestidad, paciencia, valentía y buenas decisiones — no siempre
-      son fáciles de explicar a una mente pequeña.
-    </p>
-
-    <div class="problem-highlight-box">
-      <span class="spark">✨</span>
-      <p class="problem-highlight">Ahí es donde las historias pueden ayudar.</p>
-    </div>
-
-    <p class="problem-supporting">
-      EK WonderKids transforma importantes lecciones para la vida en historias que los niños pueden entender,
-      conversaciones que las familias pueden compartir y actividades sencillas que pueden practicar juntos.
-    </p>
-
-    <div class="problem-tags">
-      <span class="problem-tag">💰 Dinero</span>
-      <span class="problem-tag">🤝 Honestidad</span>
-      <span class="problem-tag">⏳ Paciencia</span>
-      <span class="problem-tag">🦁 Valentía</span>
-      <span class="problem-tag">🎯 Buenas decisiones</span>
-    </div>
-  </div>
-</section>
-
-<!-- ══ STORY BOOKS ══ -->
-<section id="stories" class="section section--stories">
-  <div class="section-header">
-    <div class="eyebrow eyebrow-purple">📖 CUENTOS</div>
-    <h2 class="section-title">Historias con corazón</h2>
-    <p class="section-subtitle">Cuentos bellamente ilustrados que enseñan paciencia, valentía y grandes lecciones para la vida a través de aventuras memorables.</p>
-  </div>
-
-  <div class="book-grid book-grid--stories">
-
-    <article class="book-card book-card--purple">
-      <div class="book-cover">
-        <img src="/images/portada-waiting-jar.jpg" alt="The Waiting Jar" />
-        <div class="book-cover-fade"></div>
-        <span class="book-badge book-badge--purple">📖 CUENTO</span>
-        <div class="book-cover-caption">
-          <h3>The Waiting Jar</h3>
-          <p>A Story About Patience and Big Decisions</p>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cuentos para aprender sobre dinero y la vida | EK WonderKids</title>
+    <meta
+      name="description"
+      content="Cuentos y actividades para acompañar a tu hijo de 4 a 8 años en el dinero y la vida real. Descubre Semillas de Prosperidad y su recurso gratis."
+    />
+    <link rel="canonical" href="https://ekwonderkids.com/es/" />
+    <link rel="alternate" hreflang="en" href="https://ekwonderkids.com/" />
+    <link rel="alternate" hreflang="es" href="https://ekwonderkids.com/es/" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Cuentos para aprender sobre dinero y la vida | EK WonderKids"
+    />
+    <meta
+      property="og:description"
+      content="Cuentos y actividades para acompañar a tu hijo de 4 a 8 años en el dinero y la vida real. Descubre Semillas de Prosperidad y su recurso gratis."
+    />
+    <meta property="og:url" content="https://ekwonderkids.com/es/" />
+    <meta
+      property="og:image"
+      content="https://ekwonderkids.com/images/portada-ready-for-rain-ready-for-stars.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/conversion.css" />
+    <link rel="stylesheet" href="/css/forms.css" />
+    <script src="/js/analytics.js" defer></script>
+    <script src="/js/resource-forms.js" defer></script>
+    <meta name="p:domain_verify" content="a6134cd61a167fccdb36544444806de0" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "EK WonderKids",
+        "url": "https://ekwonderkids.com/es/",
+        "logo": "https://ekwonderkids.com/images/logo.png",
+        "sameAs": [
+          "https://www.amazon.com/stores/EK-WonderKids/author/B0GJ16T794"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Saltar al contenido</a>
+    <header>
+      <nav class="wrap nav" aria-label="Navegación principal">
+        <a class="brand" href="/es/"
+          ><img
+            src="/images/logo.webp"
+            alt="EK WonderKids"
+            width="900"
+            height="600"
+            decoding="async"
+            loading="lazy"
+        /></a>
+        <div class="navlinks">
+          <a href="/es/#wealth">Dinero y vida real</a
+          ><a href="/es/#books">Más cuentos</a
+          ><a href="/book_es_04.html#resource">Recurso gratis</a>
         </div>
-      </div>
-      <div class="book-info">
-        <p class="book-desc">A young boy holds a glowing jar full of wishes — but which dream does he choose? A heartwarming story about patience, saving, and making the decisions that matter most.</p>
-        <a href="https://www.amazon.com/EK-WonderKids-ebook/dp/B0GP2RW63T" target="_blank" rel="noopener" class="btn-buy btn-buy--purple">Comprar en Amazon ★</a>
-      </div>
-    </article>
-
-    <article class="book-card book-card--gold">
-      <div class="book-cover">
-        <img src="/images/portada-grand-spring-festival.jpg" alt="The Grand Spring Festival" />
-        <div class="book-cover-fade"></div>
-        <span class="book-badge book-badge--gold-dark">📖 CUENTO</span>
-        <div class="book-cover-caption">
-          <h3>The Grand Spring Festival</h3>
-          <p>Courage Takes the First Step</p>
+        <a class="language" href="/" lang="en" aria-label="Read in English"
+          >EN</a
+        >
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" id="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <span class="eyebrow">PARA PADRES QUE QUIEREN ACOMPAÑARLOS</span>
+            <h1
+              data-hook-conversation="La próxima conversación sobre dinero empieza con un cuento."
+              data-hook-jar="Un frasco. Un cuento. Una nueva forma de hablar de dinero."
+            >
+              La próxima conversación sobre dinero empieza con un cuento.
+            </h1>
+            <p class="lead">
+              Acompaña a tu hijo de 4 a 8 años a descubrir habilidades de la
+              vida real con historias, preguntas y actividades para compartir.
+              Empiecen por el dinero.
+            </p>
+            <div class="actions">
+              <a
+                class="button primary"
+                href="/book_es_04.html#resource"
+                data-cta="hero_free"
+                >Quiero la actividad gratis →</a
+              ><a class="button secondary" href="#wealth" data-cta="hero_book"
+                >Conocer el libro</a
+              >
+            </div>
+            <p class="small">En español e inglés · Para leer y hacer juntos</p>
+          </div>
+          <figure class="cover">
+            <img
+              src="/images/portada-ready-for-rain-ready-for-stars.webp"
+              alt="Ready for Rain, Ready for Stars — English cover"
+              fetchpriority="high"
+              width="900"
+              height="900"
+              decoding="async"
+            />
+            <figcaption>
+              Portada de la edición en inglés. El libro también está disponible
+              en español.
+            </figcaption>
+          </figure>
         </div>
-      </div>
-      <div class="book-info">
-        <p class="book-desc">Under the glow of the stage lights, one small girl discovers that courage isn't the absence of fear — it's taking that first magical step. A stunning tale of bravery and belonging.</p>
-        <a href="https://www.amazon.com/-/es/gp/product/B0GSCR1XJW" target="_blank" rel="noopener" class="btn-buy btn-buy--gold-dark">Comprar en Amazon ★</a>
-      </div>
-    </article>
-
-      <article class="book-card book-card--green">
-      <div class="book-cover">
-        <img src="/images/Portada_Book 3.png" alt="When the Compass Pointed North" />
-        <div class="book-cover-fade"></div>
-        <span class="book-badge book-badge--green">📖 CUENTO</span>
-        <div class="book-cover-caption">
-          <h3>When the Compass Pointed North</h3>
-          <p>A story About Doing What's Right</p>
+      </section>
+      <section class="section cream" id="how">
+        <div class="wrap">
+          <span class="eyebrow">UN MOMENTO PARA COMPARTIR</span>
+          <h2>Una historia. Una conversación. Algo para practicar.</h2>
+          <div class="three">
+            <article>
+              <span class="step">01</span>
+              <h3>Lean juntos</h3>
+              <p>
+                Acompañen a Leo y a su papá en una situación de la vida
+                cotidiana.
+              </p>
+            </article>
+            <article>
+              <span class="step">02</span>
+              <h3>Escucha lo que piensa</h3>
+              <p>
+                Usa las preguntas del recurso para abrir la conversación, a su
+                ritmo.
+              </p>
+            </article>
+            <article>
+              <span class="step">03</span>
+              <h3>Pónganlo en práctica</h3>
+              <p>
+                Preparen un frasco y exploren juntos para qué quieren ahorrar.
+              </p>
+            </article>
+          </div>
         </div>
-      </div>
-      <div class="book-info">
-        <p class="book-desc">When Bruno discovers an old compass deep in the Great Oak Forest, he must make a choice that will test his heart. Set in the charming village of Brillavale, this heartwarming adventure teaches children that honesty, integrity, and doing the right thing are the greatest treasures of all.</p>
-        <a href="https://www.amazon.com/-/es/EK-WonderKids-ebook/dp/B0H8QLJLMX" target="_blank" rel="noopener" class="btn-buy btn-buy--green">Comprar en Amazon ★</a>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<svg class="wave" viewBox="0 0 1200 72" preserveAspectRatio="none">
-  <path d="M0,0 Q400,72 800,28 Q1000,8 1200,52 L1200,72 L0,72 Z" fill="#f0f6ff" />
-</svg>
-<!-- ══ SEEDS OF WEALTH — NEW SERIES ══ -->
-<section id="wealth" class="section section--wealth">
-  <div class="section-header">
-    <div class="eyebrow eyebrow-gold-dark">🌱 NUEVA SERIE</div>
-    <h2 class="section-title">Seeds of Wealth</h2>
-    <p class="section-subtitle">Una nueva serie que enseña vocabulario financiero real a través de historias — con su primera edición disponible en inglés y próximamente en español.</p>
-  </div>
-
-  <div class="wealth-feature">
-    <img src="/images/portada-ready-for-rain-ready-for-stars.jpg" alt="Ready For Rain, Ready for Stars — Book 1 cover" />
-    <div class="wealth-feature-body">
-      <span class="wealth-launch-badge">Próximamente en español</span>
-      <h3>Listo para la Lluvia, Listo para las Estrellas</h3>
-      <p>La primera historia de Seeds of Wealth llegará muy pronto en español. Una historia familiar que introduce conceptos financieros reales de una forma sencilla y cercana para niños de 4 a 8 años.</p>
-      <a href="/book_es_04.html" class="btn-buy btn-buy--gold-dark">Obtén el recurso gratuito + adelanto →</a>
-      <a href="https://www.amazon.com/-/es/EK-WonderKids-ebook/dp/B0HC4V7Q6V/" target="_blank" rel="noopener" class="link-underline" style="display:block; margin-top:10px; font-size:14px;">Ver la edición disponible en inglés →</a>
-      <p class="wealth-series-note">Libro 1 de 4 de la serie Seeds of Wealth · Próximamente en español · Para mentes curiosas de 4 a 8 años</p>
-    </div>
-  </div>
-</section>
-
-<!-- ══ COLORING BOOK SERIES ══ -->
-<section id="books" class="section section--books">
-  <div class="section-header">
-    <div class="eyebrow eyebrow-blue">🎨 SERIE DE LIBROS PARA COLOREAR</div>
-    <h2 class="section-title">Little Heroes at Work</h2>
-    <p class="section-subtitle">Tres volúmenes de aventuras sobre profesiones que inspiran a los niños a imaginar todo lo que pueden llegar a ser.</p>
-  </div>
-
-  <div class="book-grid book-grid--coloring">
-
-    <article class="coloring-card coloring-card--blue">
-      <div class="coloring-cover coloring-cover--blue">
-        <span class="volume-badge volume-badge--blue">VOLUME 1</span>
-        <img src="/images/portada-vol1-little-heroes.png" alt="Little Heroes at Work Vol 1" />
-      </div>
-      <div class="coloring-info">
-        <div class="coloring-meta coloring-meta--blue">Coloring Book · Edades 4–8</div>
-        <h3>Little Heroes at Work</h3>
-        <p>Professions — doctors, firefighters &amp; more! A perfect first introduction to the world of work.</p>
-        <a href="https://www.amazon.com/Little-Heroes-Work-Coloring-Professions/dp/B0GHZRLFMV" target="_blank" rel="noopener" class="btn-buy btn-buy--blue">Comprar en Amazon ★</a>
-      </div>
-    </article>
-
-    <article class="coloring-card coloring-card--gold">
-      <div class="coloring-cover coloring-cover--gold">
-        <span class="volume-badge volume-badge--gold">VOLUME 2</span>
-        <img src="/images/portada-vol2-little-heroes.png" alt="Little Heroes at Work Vol 2" />
-      </div>
-      <div class="coloring-info">
-        <div class="coloring-meta coloring-meta--gold">Coloring Book · Edades 4–8</div>
-        <h3>Little Heroes at Work <span class="text-gold-dark">Vol. 2</span></h3>
-        <p>Modern &amp; Future Careers — engineers, astronauts and the exciting jobs of tomorrow!</p>
-        <a href="https://www.amazon.com/-/es/gp/product/B0GLF1N7SL" target="_blank" rel="noopener" class="btn-buy btn-buy--gold">Comprar en Amazon ★</a>
-      </div>
-    </article>
-
-    <article class="coloring-card coloring-card--red">
-      <div class="coloring-cover coloring-cover--red">
-        <span class="volume-badge volume-badge--red">VOLUME 3</span>
-        <img src="/images/portada-vol3-little-heroes.png" alt="Little Heroes at Work Vol 3" />
-      </div>
-      <div class="coloring-info">
-        <div class="coloring-meta coloring-meta--red">Coloring Book · Edades 4–8</div>
-        <h3>Little Heroes at Work <span class="text-red">Vol. 3</span></h3>
-        <p>Future Careers &amp; Creative Skills — scientists, robotics &amp; the innovators of tomorrow!</p>
-        <a href="https://www.amazon.com/-/es/gp/product/B0GNDSP77R" target="_blank" rel="noopener" class="btn-buy btn-buy--red">Comprar en Amazon ★</a>
-      </div>
-    </article>
-
-  </div>
-
-  <div class="section-cta">
-    <a href="https://www.amazon.com/stores/EK-WonderKids/author/B0GJ16T794" target="_blank" rel="noopener" class="link-underline">Ver todos los libros en nuestra tienda de Amazon →</a>
-  </div>
-</section>
-
-<svg class="wave" viewBox="0 0 1200 72" preserveAspectRatio="none">
-  <path d="M0,72 L0,32 Q300,0 600,36 Q900,72 1200,24 L1200,72 Z" fill="#06134a" />
-</svg>
-
-<!-- ══ ABOUT / MISSION ══ -->
-<section id="about" class="section section--about">
-  <div class="about-wrap">
-    <div class="about-logo-wrap">
-      <div class="about-logo-circle">
-        <img src="/images/logo.png" alt="EK WonderKids" />
-      </div>
-    </div>
-    <div class="about-content">
-  <div class="eyebrow eyebrow-gold">✦ NUESTRA MISIÓN ✦</div>
-  <h2 class="about-title">Más que libros.<br />Un mundo de aprendizaje que crece.</h2>
-  <p class="about-text">EK WonderKids crea historias, actividades y herramientas familiares que ayudan a los niños a desarrollar el carácter, la confianza y las habilidades para la vida que necesitan. Cada historia presenta una idea. Cada actividad gratuita ayuda a practicarla. Cada conversación en casa ayuda a hacerla crecer.</p>
-  <div class="mission-badges">
-    <div class="mission-badge">
-      <div class="mission-icon">💛</div>
-      <div class="mission-name">Carácter y valentía</div>
-      <div class="mission-sub">Herramientas para grandes emociones</div>
-    </div>
-    <div class="mission-badge">
-      <div class="mission-icon">🌱</div>
-      <div class="mission-name">Confianza con el dinero</div>
-      <div class="mission-sub">Herramientas para la vida real</div>
-    </div>
-    <div class="mission-badge">
-      <div class="mission-icon">🚀</div>
-      <div class="mission-name">Grandes sueños</div>
-      <div class="mission-sub">Herramientas para despertar curiosidad</div>
-    </div>
-  </div>
-</div>
-</section>
-
-<svg class="wave" viewBox="0 0 1200 72" preserveAspectRatio="none">
-  <path d="M0,0 Q400,72 800,28 Q1000,8 1200,56 L1200,72 L0,72 Z" fill="#fffbe6" />
-</svg>
-
-<!-- ══ REVIEWS ══ -->
-<!-- <section id="reviews" class="section section--reviews">
-  <div class="section-header">
-    <div class="eyebrow eyebrow-gold-dark">⭐ WHAT PARENTS SAY ⭐</div>
-    <h2 class="section-title">Little readers, big fans!</h2>
-  </div>
-  <div class="review-grid">
-    <div class="review-card review-card--gold">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"My son asks to color every single night. He says he wants to be an astronaut AND an engineer — Volume 2 is his favorite!"</p>
-      <div class="review-author">
-        <div class="avatar avatar--blue">👩</div>
+      </section>
+      <section class="section" id="wealth">
+        <div class="wrap feature-grid">
+          <figure class="cover">
+            <img
+              src="/images/portada-ready-for-rain-ready-for-stars.webp"
+              alt="Ready for Rain, Ready for Stars — English cover"
+              loading="lazy"
+              width="900"
+              height="900"
+              decoding="async"
+            />
+            <figcaption>
+              Portada de la edición en inglés. El libro también está disponible
+              en español.
+            </figcaption>
+          </figure>
+          <div>
+            <span class="eyebrow">SEMILLAS DE PROSPERIDAD · 4–8 AÑOS</span>
+            <h2>Listo para la Lluvia, Listo para las Estrellas</h2>
+            <p>
+              Leo observa a su papá guardar monedas cada noche. Cuando el
+              refrigerador se rompe, descubre para qué sirve estar preparado. Un
+              cuento para explorar el fondo de emergencia, el fondo de
+              oportunidades y la red de seguridad.
+            </p>
+            <div class="tags">
+              <span>Ahorrar para imprevistos</span
+              ><span>Prepararse para oportunidades</span
+              ><span>Ayudar a otros</span>
+            </div>
+            <div class="actions">
+              <a
+                class="button primary"
+                href="/book_es_04.html#resource"
+                data-cta="featured_companion"
+                >Probar el recurso gratis →</a
+              ><a
+                class="button secondary"
+                href="https://www.amazon.com/dp/B0HFCPGR97"
+                target="_blank"
+                rel="noopener"
+                data-placement="featured"
+                data-book="book_es_04"
+                >Ver formatos y precio en Amazon ↗</a
+              >
+            </div>
+            <p class="small">
+              Libro disponible en español e inglés. Tapa blanda y Kindle:
+              comprueba formato, precio y envío en Amazon.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="section forest" id="about">
+        <div class="wrap narrow">
+          <span class="eyebrow">EMPIEZA CON ALGO PEQUEÑO</span>
+          <h2>No necesitas tener todas las respuestas.</h2>
+          <p class="lead">
+            Nuestra tarea es acompañarte: darte una historia para empezar,
+            preguntas para escuchar a tu hijo y una actividad para explorar
+            juntos. La curiosidad de tu familia hace el resto.
+          </p>
+          <a
+            class="button light"
+            href="/book_es_04.html#resource"
+            data-cta="mission_free"
+            >Empezar con el Frasco Listo →</a
+          >
+        </div>
+      </section>
+      <section class="section cream" id="books">
+        <span id="stories"></span>
+        <div class="wrap">
+          <span class="eyebrow">OTRAS CONVERSACIONES QUE IMPORTAN</span>
+          <h2>
+            También hay espacio para la valentía, la paciencia y los grandes
+            sueños.
+          </h2>
+          <div class="catalog">
+            <article class="product">
+              <img
+                src="/images/portada-waiting-jar.webp"
+                alt="The Waiting Jar"
+                loading="lazy"
+                width="900"
+                height="900"
+                decoding="async"
+              />
+              <div>
+                <span class="eyebrow">Paciencia y decisiones</span>
+                <h3>The Waiting Jar</h3>
+                <p>Un cuento para conversar sobre esperar y ahorrar.</p>
+                <p class="small">Libro en inglés</p>
+                <a
+                  href="https://www.amazon.com/dp/B0GP2RW63T"
+                  target="_blank"
+                  rel="noopener"
+                  data-placement="catalog"
+                  >Ver en Amazon ↗</a
+                >
+              </div>
+            </article>
+            <article class="product">
+              <img
+                src="/images/portada-grand-spring-festival.webp"
+                alt="The Grand Spring Festival"
+                loading="lazy"
+                width="900"
+                height="913"
+                decoding="async"
+              />
+              <div>
+                <span class="eyebrow">Valentía</span>
+                <h3>The Grand Spring Festival</h3>
+                <p>Un pequeño primer paso para conversar sobre la valentía.</p>
+                <p class="small">Libro en inglés</p>
+                <a
+                  href="https://www.amazon.com/dp/B0GSCR1XJW"
+                  target="_blank"
+                  rel="noopener"
+                  data-placement="catalog"
+                  >Ver en Amazon ↗</a
+                >
+              </div>
+            </article>
+            <article class="product">
+              <img
+                src="/images/Portada_Book 3.webp"
+                alt="When the Compass Pointed North"
+                loading="lazy"
+                width="900"
+                height="900"
+                decoding="async"
+              />
+              <div>
+                <span class="eyebrow">Honestidad</span>
+                <h3>When the Compass Pointed North</h3>
+                <p>Acompaña a Bruno y conversa sobre hacer lo correcto.</p>
+                <p class="small">Libro en inglés</p>
+                <a
+                  href="https://www.amazon.com/dp/B0H8QLJLMX"
+                  target="_blank"
+                  rel="noopener"
+                  data-placement="catalog"
+                  >Ver en Amazon ↗</a
+                >
+              </div>
+            </article>
+            <article class="product">
+              <img
+                src="/images/portada-vol1-little-heroes.webp"
+                alt="Little Heroes at Work"
+                loading="lazy"
+                width="412"
+                height="532"
+                decoding="async"
+              />
+              <div>
+                <span class="eyebrow">Profesiones · Vol. 1</span>
+                <h3>Little Heroes at Work</h3>
+                <p>
+                  Coloreen y exploren médicos, bomberos y otros héroes
+                  cotidianos.
+                </p>
+                <p class="small">Libro en inglés</p>
+                <a
+                  href="https://www.amazon.com/dp/B0GHZRLFMV"
+                  target="_blank"
+                  rel="noopener"
+                  data-placement="catalog"
+                  >Ver en Amazon ↗</a
+                >
+              </div>
+            </article>
+            <article class="product">
+              <img
+                src="/images/portada-vol2-little-heroes.webp"
+                alt="Little Heroes at Work Vol. 2"
+                loading="lazy"
+                width="900"
+                height="1350"
+                decoding="async"
+              />
+              <div>
+                <span class="eyebrow">Profesiones · Vol. 2</span>
+                <h3>Little Heroes at Work Vol. 2</h3>
+                <p>
+                  Exploren ingenieros, astronautas y profesiones del mañana.
+                </p>
+                <p class="small">Libro en inglés</p>
+                <a
+                  href="https://www.amazon.com/dp/B0GLF1N7SL"
+                  target="_blank"
+                  rel="noopener"
+                  data-placement="catalog"
+                  >Ver en Amazon ↗</a
+                >
+              </div>
+            </article>
+            <article class="product">
+              <img
+                src="/images/portada-vol3-little-heroes.webp"
+                alt="Little Heroes at Work Vol. 3"
+                loading="lazy"
+                width="900"
+                height="1350"
+                decoding="async"
+              />
+              <div>
+                <span class="eyebrow">Creatividad · Vol. 3</span>
+                <h3>Little Heroes at Work Vol. 3</h3>
+                <p>Imaginen un futuro de ciencia, robótica y creatividad.</p>
+                <p class="small">Libro en inglés</p>
+                <a
+                  href="https://www.amazon.com/dp/B0GNDSP77R"
+                  target="_blank"
+                  rel="noopener"
+                  data-placement="catalog"
+                  >Ver en Amazon ↗</a
+                >
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="newsletter">
+        <div class="wrap narrow">
+          <h2>Una idea para probar en casa, antes de decidir.</h2>
+          <p class="lead">
+            Conoce lo que incluye el recurso y úsalo para empezar una
+            conversación. Algunas preguntas acompañan escenas del libro.
+          </p>
+          <a
+            class="button primary"
+            href="/book_es_04.html#resource"
+            data-cta="bottom_free"
+            >Ver el recurso gratuito →</a
+          >
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap footer">
         <div>
-          <div class="author-name">Sarah M.</div>
-          <div class="author-meta">Mom of 2 · ✅ Verified Purchase</div>
+          <strong>EK WonderKids</strong>
+          <p>Pequeñas conversaciones para la vida de verdad.</p>
         </div>
-      </div>
-    </div>
-    <div class="review-card review-card--red">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"The illustrations are beautiful and the career themes spark the best conversations. My class uses them every Friday!"</p>
-      <div class="review-author">
-        <div class="avatar avatar--peach">👩‍🏫</div>
         <div>
-          <div class="author-name">Laura K.</div>
-          <div class="author-meta">1st Grade Teacher · ✅ Verified Purchase</div>
+          <a href="/es/">Inicio</a
+          ><a href="/book_es_04.html">Recurso financiero</a
+          ><a href="/es/privacy.html">Privacidad</a
+          ><a
+            href="https://www.amazon.com/stores/EK-WonderKids/author/B0GJ16T794"
+            target="_blank"
+            rel="noopener"
+            >Amazon ↗</a
+          >
         </div>
+        <p>© 2026 EK WonderKids</p>
       </div>
-    </div>
-    <div class="review-card review-card--blue">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Finally a brand that's educational AND fun. My kids have all three volumes. Volume 3 with the robot is incredible!"</p>
-      <div class="review-author">
-        <div class="avatar avatar--sky">👨</div>
-        <div>
-          <div class="author-name">Marcos T.</div>
-          <div class="author-meta">Dad of 3 · ✅ Verified Purchase</div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <div class="section-header">
-  <div class="eyebrow eyebrow-gold-dark">✦ POR QUÉ LAS FAMILIAS NOS ELIGEN ✦</div>
-  <h2 class="section-title">Creado para mentes en crecimiento</h2>
-</div> 
-<div class="review-grid">
-  <div class="review-card review-card--gold"><p class="review-text">✓ Lecciones significativas para la vida real</p></div>
-  <div class="review-card review-card--red"><p class="review-text">✓ Historias bellas y memorables</p></div>
-  <div class="review-card review-card--blue"><p class="review-text">✓ Actividades gratuitas más allá del libro</p></div>
-</div>
-</section>
-
-<svg class="wave" viewBox="0 0 1200 72" preserveAspectRatio="none">
-  <path d="M0,72 L0,24 Q200,64 480,24 Q760,-16 1200,44 L1200,72 Z" fill="#e5231a" />
-</svg>
-
-<!-- ══ COMING SOON / NEWSLETTER ══ -->
-<section id="newsletter" class="section section--newsletter">
-  <div class="newsletter-bg-dots"></div>
-  <div class="newsletter-glow newsletter-glow--top"></div>
-  <div class="newsletter-glow newsletter-glow--bottom"></div>
-
-  <div class="newsletter-content">
-    <div id="kitFormWrap">
-      <div class="eyebrow eyebrow-light">🎁 RECURSO FAMILIAR GRATUITO</div>
-      <h2 class="newsletter-title">Convierte la hora del cuento<br>en un momento para crecer</h2>
-      <p class="newsletter-text">Obtén The WonderKids Family Kit — 5 actividades breves sobre paciencia, valentía, honestidad, ahorro y grandes sueños que tu familia puede comenzar hoy, gratis.</p>
-      <form id="resource-form-kit">
-        <input type="text" name="name" placeholder="Tu nombre" required class="newsletter-input">
-        <input type="email" name="email" placeholder="Tu correo electrónico" required class="newsletter-input">
-        <input type="hidden" name="book" value="family_kit">
-        <input type="hidden" name="language" value="es">
-        <button type="submit" class="btn btn-gold newsletter-submit">Obtén el kit gratis ⭐</button>
-      </form>
-      <p class="newsletter-note" id="kitNote">Gratis. Sin spam. Solo asombro.</p>
-    </div>
-
-    <div id="kitSuccess" style="display:none;">
-      <div class="eyebrow eyebrow-light">🎉 TODO LISTO</div>
-      <h2 class="newsletter-title">¡Revisa tu correo!</h2>
-      <p class="newsletter-text">Tu Family Kit se está descargando y también enviaremos una copia a tu correo electrónico.</p>
-      <a href="https://www.amazon.com/stores/EK-WonderKids/author/B0GJ16T794" class="btn btn-gold newsletter-submit" style="display:inline-block; text-decoration:none;">Explorar los libros →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FOOTER ══ -->
-<footer class="footer">
-  <a href="#hero" class="footer-logo">
-    <img src="/images/logo.png" alt="EK WonderKids" />
-  </a>
-  <div class="footer-links">
-    <a href="#books">Libros para Colorear</a>
-    <a href="#stories">Cuentos</a>
-    <a href="#about">Nosotros</a>
-    <a href="#newsletter">Próximamente</a>
-    <a href="https://www.amazon.com/stores/EK-WonderKids/author/B0GJ16T794" target="_blank" rel="noopener">Tienda en Amazon</a>
-  </div>
-  <p class="footer-copy">© 2025 EK WonderKids · Preparando pequeñas mentes para grandes futuros.</p>
-</footer>
-
-<script src="/js/app.js"></script>
-<script src="/js/language-switcher.js"></script>
-<script>
-  document.querySelectorAll('a[href*="amazon.com"]').forEach(link => {
-    link.addEventListener('click', () => {
-      gtag('event', 'amazon_click', {
-        source_page: window.location.pathname,
-        link_text: link.textContent.trim().slice(0, 60)
-      });
-    });
-  });
-</script>
-</body>
+    </footer>
+  </body>
 </html>
