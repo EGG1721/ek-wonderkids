@@ -33,7 +33,7 @@ El 28 de octubre de 2026 se realizaron dos solicitudes de producción autorizada
 5. Confirmar que la migración de idioma ya está aplicada. No ejecutar `migration_add_language.sql` dos veces. El servicio mantiene compatibilidad con el esquema anterior; no se ejecutó ninguna migración remota durante estos cambios.
 6. Verificar el dominio preferido (con/sin www), redirecciones y los eventos en la propiedad GA4 existente. Las páginas usan el dominio público observado `ekwonderkids.com` y URLs canónicas sin `.html` para los recursos, conforme al redireccionamiento de assets HTML.
 7. Validar con el dueño el texto de privacidad, un canal de contacto para solicitudes sobre datos, la política de retención de contactos y los requisitos de consentimiento de los mercados elegidos. No se implementó una eliminación automática de contactos. El vencimiento de enlaces NO borra el registro.
-8. Revisar páginas reales del libro cuando el dueño las facilite. No hay reseñas, fotografías familiares ni páginas interiores inventadas. La edición española muestra la portada inglesa con una aclaración visible hasta recibir la portada correspondiente.
+8. La actualización preparada incorpora la portada española del dueño y tres ilustraciones interiores originales. `SAMPLES.md` documenta su selección y el fragmento comprobado en ambos idiomas. Verificar esta actualización antes de su publicación controlada; no se incluyen los manuscritos PDF completos en los archivos públicos ni se inventan reseñas o escenas.
 
 ## Registro y correo
 

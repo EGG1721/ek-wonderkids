@@ -161,7 +161,7 @@ test("capture review screenshots", async ({ page }) => {
   ]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(url);
-    for (const image of await page.locator("img").all()) {
+    for (const image of await page.locator("img[src]:visible").all()) {
       await image.scrollIntoViewIfNeeded();
       await expect
         .poll(() =>
