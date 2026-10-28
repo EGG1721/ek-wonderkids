@@ -14,6 +14,18 @@ Node 24 recomendado. Ejecuta `npm ci`, `npm test`, `npm run check`, `npm run bui
 
 ## Antes de publicar
 
+### Publicaciones de ramas de trabajo
+
+La versión financiera `ba6e895` quedó pública por la integración automática de Cloudflare y el dueño confirmó que desea mantenerla. Las siguientes revisiones se preparan sin reemplazar esa versión. `scripts/deployment-policy.mjs` detiene Workers Builds cuando `WORKERS_CI=1` y la rama no es `main`, incluso si falta la variable de rama. Este bloqueo intencional aparece como un build detenido en Cloudflare; GitHub Actions y las pruebas locales pueden seguir comprobando los cambios.
+
+Este control del repositorio no cambia la configuración de la cuenta. En Cloudflare, revisar **Settings > Build > Branch control** para usar `main` como rama de producción y configurar previews aisladas. No activar `main` hasta incorporar la versión financiera que el dueño quiere conservar; `main` todavía contiene el sitio anterior. El guard no protege commits antiguos que no lo incluyen ni sustituye los permisos de despliegue de la cuenta.
+
+Contacto público indicado por el dueño: `contac@ekwonderkids.com`. Su funcionamiento como buzón todavía requiere verificación.
+
+### Verificación real del recurso financiero
+
+El 28 de octubre de 2026 se realizaron dos solicitudes de producción autorizadas por el dueño, una por idioma. La interfaz informó aceptación del envío y recepción del PDF en ambos casos; el dueño confirmó que recibió ambos correos en su buzón. No se repitieron envíos adicionales. La dirección privada de prueba no se publica en este documento. Esto valida el recorrido del recurso financiero, no todos los recursos del catálogo ni el nuevo buzón de contacto.
+
 1. Confirmar que Cloudflare usa `wrangler.jsonc` y construye `dist/`, y que el despliegue de producción sigue la rama prevista. El README anterior decía Pages; la configuración del repositorio corresponde a Workers.
 2. Confirmar en el entorno de destino los bindings `DB`, `RESOURCES`, `ASSETS` y `SUBSCRIBE_LIMITER`. El límite básico es de 10 solicitudes/minuto por IP y centro de datos; no es una defensa global contra bots distribuidos. La comprobación adicional de solicitudes recientes por correo reduce repeticiones, pero no garantiza exclusión de carreras concurrentes.
 3. Mantener `RESEND_API_KEY`, `FROM_EMAIL` y `FROM_EMAIL_NEWSLETTER` como secretos/configuración privada. No introducir sus valores en Git. Verificar dominio remitente, SPF/DKIM y registros del proveedor antes de probar correo real con una dirección del dueño autorizada.
