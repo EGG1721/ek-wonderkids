@@ -771,3 +771,36 @@ footer {
     gap: 18px;
   }
 }
+
+.resource-next {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.resource-next p {
+  font-size: 15px;
+}
+.activity-content {
+  max-width: 790px;
+}
+.activity-content li {
+  margin-bottom: 18px;
+}
+@media (max-width: 800px) {
+  .hero.home-hero,
+  .hero.product-hero {
+    padding-top: 24px;
+  }
+  .hero.home-hero .cover,
+  .hero.product-hero .cover {
+    grid-row: 1;
+    max-width: 150px;
+  }
+  .hero.home-hero .hero-grid,
+  .hero.product-hero .hero-grid {
+    gap: 24px;
+  }
+  .hero.product-hero h1 {
+    font-size: clamp(30px, 6vw, 42px);
+  }
+}

@@ -154,7 +154,11 @@ async function subscribe(request, env, newsletter) {
     });
   }
   const name = typeof data.name === "string" ? data.name.trim() : "";
-  if (!name || name.length > 100 || /[\u0000-\u001f\u007f]/.test(name))
+  if (
+    (data.name !== undefined && typeof data.name !== "string") ||
+    name.length > 100 ||
+    /[\u0000-\u001f\u007f]/.test(name)
+  )
     return json({ error: "invalid_name" }, 400);
   if (typeof data.book !== "string" || !Object.hasOwn(RESOURCES, data.book))
     return json({ error: "invalid_resource" }, 400);

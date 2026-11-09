@@ -116,6 +116,28 @@ test("provider failure keeps direct download and does not claim accepted mail", 
     0,
   );
 });
+
+for (const name of [undefined, "", "   "]) {
+  test(`optional name (${JSON.stringify(name)}) still delivers and uses a neutral greeting`, async (t) => {
+    const f = fixture(t);
+    let mail;
+    t.mock.method(globalThis, "fetch", async (_, options) => {
+      mail = JSON.parse(options.body);
+      return new Response("{}");
+    });
+    const response = await worker.fetch(request({ name }), f.env);
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).success, true);
+    assert.equal(f.sqlite.prepare("SELECT name FROM leads").get().name, "");
+    assert.match(mail.html, />Hola,</);
+    assert.doesNotMatch(mail.html, /Hola ,|undefined|null/);
+    assert.equal(
+      f.sqlite.prepare("SELECT COUNT(*) AS n FROM newsletter_subscribers").get()
+        .n,
+      0,
+    );
+  });
+}
 test("missing credentials preserve direct download without attempting an email", async (t) => {
   const f = fixture(t);
   delete f.env.RESEND_API_KEY;

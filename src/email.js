@@ -66,7 +66,20 @@ export async function sendResourceEmail(
       ? `Tu recurso gratuito: ${resourceTitle}`
       : `Your free resource: ${resourceTitle}`;
 
-    const greeting = isSpanish ? `Hola ${safeName},` : `Hi ${safeName},`;
+    const greeting = safeName
+      ? isSpanish
+        ? `Hola ${safeName},`
+        : `Hi ${safeName},`
+      : isSpanish
+        ? "Hola,"
+        : "Hi there,";
+    const gettingStarted = /Ready for Rain|Listo para la Lluvia/.test(
+      resourceTitle,
+    )
+      ? isSpanish
+        ? "Para empezar, imprime las etiquetas y elige un recipiente seguro. Preparen juntos su Frasco Listo; algunas preguntas del PDF acompañan momentos del cuento."
+        : "To get started, print the labels and choose a safe container. Prepare your Ready Jar together; some PDF questions refer to moments in the story."
+      : "";
     const bodyCopy = isSpanish
       ? `Gracias por tu interés en <strong>${safeTitle}</strong>. Tu recurso gratuito está listo — haz clic en el botón para descargarlo.`
       : `Thank you for your interest in <strong>${safeTitle}</strong>! Your free companion resource is ready — just click below to download it.`;
@@ -111,7 +124,7 @@ export async function sendResourceEmail(
                 </a>
               </div>
               <p style="font-size:12.5px; color:#8A7D68; text-align:center; margin:0;">
-                ${privacyNote}
+                ${gettingStarted ? gettingStarted + "<br><br>" : ""}${privacyNote}
               </p>
             </div>
             <div style="padding:20px 32px; text-align:center; background:#FDF6E9;">

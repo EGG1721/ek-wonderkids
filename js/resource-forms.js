@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sending: "Preparando tu recurso…",
         ready: "Tu recurso está listo.",
         accepted:
-          "El servicio de correo aceptó el envío. Revisa también la carpeta de spam.",
+          "Hemos solicitado el envío de tu recurso. Si no lo ves, revisa spam o descárgalo aquí.",
         failed:
           "No pudimos enviar el correo. Puedes descargar el recurso aquí.",
         download: "Descargar PDF",
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         wait: "Espera un minuto antes de volver a solicitar el recurso.",
         unavailable:
           "Este recurso no está disponible ahora. Inténtalo más tarde.",
-        note: "Usaremos tu nombre y correo para entregar este recurso. Esta solicitud no te suscribe al boletín.",
+        note: "Usaremos tu correo y, si lo indicas, tu nombre para entregar este recurso. Esta solicitud no te suscribe al boletín.",
         english:
           "Este kit está disponible en inglés. Para un recurso en español, elige el Frasco Listo.",
       }
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sending: "Preparing your resource…",
         ready: "Your resource is ready.",
         accepted:
-          "The email service accepted the message. Please check your spam folder too.",
+          "We have requested your resource email. If it does not appear, check spam or download it here.",
         failed:
           "We could not send the email. You can download your resource here.",
         download: "Download PDF",
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         wait: "Please wait a minute before requesting the resource again.",
         unavailable:
           "This resource is unavailable right now. Please try again later.",
-        note: "We use your name and email to deliver this resource. This request does not subscribe you to a newsletter.",
+        note: "We use your email and, if provided, your name to deliver this resource. This request does not subscribe you to a newsletter.",
       };
   document.querySelectorAll("form").forEach((form, index) => {
     if (!form.elements.namedItem("book")) return;
@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
         label.textContent =
           field.name === "name"
             ? es
-              ? "Tu nombre"
-              : "Your name"
+              ? "Tu nombre (opcional)"
+              : "Your name (optional)"
             : es
               ? "Tu correo"
               : "Your email";
@@ -73,6 +73,15 @@ document.addEventListener("DOMContentLoaded", () => {
       field.autocomplete = field.name === "name" ? "given-name" : "email";
       field.maxLength = field.name === "name" ? 100 : 254;
     }
+    let started = false;
+    form.addEventListener("input", (event) => {
+      if (started || !["name", "email"].includes(event.target.name)) return;
+      started = true;
+      window.ekwTrack?.("resource_form_start", {
+        resource: form.elements.namedItem("book").value,
+        placement: form.id,
+      });
+    });
     const trap = document.createElement("input");
     trap.type = "hidden";
     trap.name = "website";
@@ -140,7 +149,24 @@ document.addEventListener("DOMContentLoaded", () => {
         downloadButton.textContent = text.download;
         const downloadNote = document.createElement("p");
         status.append(heading, emailNote, downloadButton, downloadNote);
-        window.ekwTrack?.("email_signup", {
+        if (["book_es_04", "book_en_04"].includes(payload.book)) {
+          const next = document.createElement("div");
+          next.className = "resource-next";
+          const instruction = document.createElement("p");
+          instruction.textContent = es
+            ? "Empieza por preparar las etiquetas y elegir un recipiente seguro para su Frasco Listo."
+            : "Start by preparing the labels and choosing a safe container for your Ready Jar.";
+          const story = document.createElement("a");
+          story.href =
+            (es ? "/book_es_04.html" : "/book_en_04.html") + "#inside";
+          story.dataset.cta = "resource_next_story";
+          story.textContent = es
+            ? "Conoce el cuento que acompaña la actividad →"
+            : "Look inside the story that goes with the activity →";
+          next.append(instruction, story);
+          status.append(next);
+        }
+        window.ekwTrack?.("resource_request_success", {
           resource: payload.book,
           placement: form.id,
         });

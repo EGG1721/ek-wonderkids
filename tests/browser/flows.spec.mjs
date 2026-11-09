@@ -141,6 +141,8 @@ test("hook variant changes headline and measurement without storing personal dat
   await page.goto("/es/?hook=jar");
   await expect(page.locator("h1")).toContainText("Un frasco. Un cuento.");
   await page.locator("[data-cta=hero_book]").click();
+  await expect(page).toHaveURL(/book_es_04.html#inside/);
+  await page.locator("[data-cta=hero_free]").click();
   const events = await page.evaluate(() =>
     window.dataLayer
       .filter((e) => e[0] === "event")
