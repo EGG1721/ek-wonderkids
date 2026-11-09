@@ -1,6 +1,6 @@
 # Recorrido comercial y medición
 
-Actualizado: 9 de noviembre de 2026. Cambios preparados en una rama de trabajo. No constituyen datos de resultados.
+Actualizado: 9 de noviembre de 2026. La instrumentación está publicada en la web; el informe remoto sigue pendiente de configurar. Esta especificación no constituye datos de resultados.
 
 ## Informe que debe configurarse en GA4
 

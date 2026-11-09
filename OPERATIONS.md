@@ -18,7 +18,7 @@ Node 24 recomendado. Ejecuta `npm ci`, `npm test`, `npm run check`, `npm run bui
 
 La versión financiera `ba6e895` quedó pública por la integración automática de Cloudflare y el dueño confirmó que desea mantenerla. Las siguientes revisiones se preparan sin reemplazar esa versión. `scripts/deployment-policy.mjs` detiene Workers Builds cuando `WORKERS_CI=1` y la rama no es `main`, incluso si falta la variable de rama. Este bloqueo intencional aparece como un build detenido en Cloudflare; GitHub Actions y las pruebas locales pueden seguir comprobando los cambios.
 
-Este control del repositorio no cambia la configuración de la cuenta. En Cloudflare, revisar **Settings > Build > Branch control** para usar `main` como rama de producción y configurar previews aisladas. No activar `main` hasta incorporar la versión financiera que el dueño quiere conservar; `main` todavía contiene el sitio anterior. El guard no protege commits antiguos que no lo incluyen ni sustituye los permisos de despliegue de la cuenta.
+Este control del repositorio no cambia la configuración de la cuenta. En Cloudflare, revisar **Settings > Build > Branch control** para usar `main` como rama de producción y configurar previews aisladas. La versión financiera y la revisión del 9 de noviembre ya están integradas en `main`. Esta última se publicó con Wrangler y autorización del propietario; confirmar en Cloudflare la rama de producción antes de dar por probado un despliegue automático. El guard no protege commits antiguos que no lo incluyen ni sustituye los permisos de despliegue de la cuenta.
 
 Contacto público indicado por el dueño: `contac@ekwonderkids.com`. Su funcionamiento como buzón todavía requiere verificación.
 
@@ -37,9 +37,9 @@ El 28 de octubre de 2026 se realizaron dos solicitudes de producción autorizada
 
 ## Registro y correo
 
-`POST /api/subscribe`: JSON con `name`, `email`, `book`, `language` (opcional) y `website` vacío. Los libros admitidos se enumeran en `src/index.js`. Requiere mismo origen si se envía la cabecera Origin, valida datos y limita frecuencia. Retorna `success`, `downloadUrl`, `emailStatus` (`accepted` o `failed`) y `resourceLanguage`. `accepted` significa aceptación HTTP del proveedor, no llegada al buzón. Si el correo falla, el recurso sigue disponible.
+`POST /api/subscribe`: JSON con `name` (opcional), `email`, `book`, `language` (opcional) y `website` vacío. Un nombre omitido se guarda vacío y usa un saludo neutral. Los libros admitidos se enumeran en `src/index.js`. Requiere mismo origen si se envía la cabecera Origin, valida datos y limita frecuencia. Retorna `success`, `downloadUrl`, `emailStatus` (`accepted` o `failed`) y `resourceLanguage`. `accepted` significa aceptación HTTP del proveedor, no llegada al buzón. Si el correo falla, el recurso sigue disponible.
 
-El navegador ofrece descarga manual y comprueba que recibió una respuesta PDF antes de emitir `resource_received`. Ese evento no demuestra que el usuario abrió o guardó el archivo. `email_signup` indica solicitud guardada y no inscripción a una campaña de marketing.
+El navegador ofrece descarga manual y comprueba que recibió una respuesta PDF antes de emitir `resource_received`. Ese evento no demuestra que el usuario abrió o guardó el archivo. `resource_request_success` indica solicitud guardada y no inscripción a una campaña de marketing. Sustituye al nombre histórico `email_signup` desde la revisión del 9 de noviembre; documentar ese corte en los informes.
 
 El endpoint histórico `POST /subscribe` conserva el registro único y el correo de bienvenida en inglés; no se usa para los recursos nuevos. No se añadieron campañas automáticas ni se inscribió a los contactos existentes en listas nuevas.
 
@@ -49,10 +49,14 @@ El endpoint histórico `POST /subscribe` conserva el registro único y el correo
 
 Comparar `/?hook=conversation` frente a `/?hook=jar`, y `/es/?hook=conversation` frente a `/es/?hook=jar`. Las páginas del libro admiten los mismos parámetros. La variante se conserva solo durante la sesión del navegador. No hay reparto aleatorio: son variantes para campañas controladas, no un experimento con significación estadística garantizada.
 
-Eventos: `cta_click`, `amazon_click`, `resource_request`, `email_signup`, `resource_request_failed`, `resource_received`, `resource_download_failed`. Llevan ubicación, idioma y variante; no nombres, correos ni tokens. `amazon_click` no representa una venta. Mantener fuentes y audiencias comparables, recopilar una línea base y configurar Amazon Attribution en una cuenta elegible antes de evaluar compras.
+Eventos: `cta_click`, `amazon_click`, `section_view`, `resource_form_start`, `resource_request`, `resource_request_success`, `resource_request_failed`, `resource_received`, `resource_download_failed`. Llevan ubicación, idioma y variante; no nombres, correos ni tokens. `amazon_click` no representa una venta. Mantener fuentes y audiencias comparables, recopilar una línea base y configurar Amazon Attribution en una cuenta elegible antes de evaluar compras.
 
 ## Limpieza y recuperación
 
 Se retiran del seguimiento Git los archivos locales de `.wrangler/`; permanecen en el disco del entorno de trabajo. No se modifica el historial existente. Revisar esos archivos de forma privada antes de decidir si hace falta retirar información histórica. No se comprobó ni se afirma una filtración de credenciales.
 
 Para revertir, usar un commit de reversión o la versión anterior del Worker. No se requiere migración de base de datos para desplegar estas correcciones. No mezclar ni publicar hasta completar las comprobaciones del entorno real.
+
+## Publicación comprobada — 9 de noviembre de 2026
+
+Fuente de ejecución: `863ba49`. Versión: `aedf144a-32cd-440e-add3-c2c48cfb1965`. Se conservaron las variables existentes al publicar. Se verificaron las páginas ES/EN, el nombre opcional y la continuidad de sección, además de las ocho páginas nuevas de actividades e índices. Las 25 pruebas del servicio/política y 53 de navegador terminaron correctamente. No se repitieron envíos reales de prueba ni migraciones remotas. Pinterest e Instagram están enlazados al pie; las cuentas públicas se comprobaron.
